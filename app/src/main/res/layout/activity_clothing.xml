@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar (header) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:title="Algerian Clothing"
+            app:titleTextColor="#468C8A">
+
+            <!-- Bouton Login dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Login"
+                android:padding="8dp"
+                android:src="@drawable/ic_login"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!-- Bouton Exit dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/exit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Exit"
+                android:padding="8dp"
+                android:src="@drawable/ic_close"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Contenu principal avec ScrollView pour gérer le défilement -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#468C8A">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Première carte : Traditional Algerian Costumes -->
+                <LinearLayout
+                    android:id="@+id/traditional_costumes_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Traditional Algerian Costumes"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur les costumes traditionnels algériens -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian traditional costumes are a vibrant reflection of the country's rich cultural heritage, blending Berber, Arab, and Andalusian influences. For women, the Karakou, a velvet jacket adorned with intricate gold embroidery, is a popular garment in Algiers, often paired with a long skirt called a Fouta. In the Kabylie region, Berber women wear colorful dresses with woven patterns, accessorized with silver jewelry like the Khalkhal (ankle bracelets). Men often don the Burnous, a woolen cloak with a hood, which is both practical for the desert climate and symbolic of status. These garments, often worn during celebrations and weddings, showcase Algeria's diversity and deep-rooted traditions."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Titre : Some Traditional Algerian Clothing -->
+
+                <!-- Slider d'images -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/clothing_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/clothing_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Carte : Women's Heritage Clothing -->
+                <LinearLayout
+                    android:id="@+id/womens_heritage_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Women's Heritage Clothing"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur les vêtements patrimoniaux des femmes -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian women's heritage clothing reflects centuries of tradition and craftsmanship. From the elegant Karakou of Algiers to the embroidered Chedda of Tlemcen, these garments are often worn during weddings and celebrations, showcasing the country's cultural diversity."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Carte : Chedda -->
+                <LinearLayout
+                    android:id="@+id/chedda_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Image de la Chedda (à gauche) -->
+                    <ImageView
+                        android:id="@+id/chedda_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/chada"
+                        android:contentDescription="Chedda Image" />
+
+                    <!-- Conteneur pour le titre et le paragraphe (à droite) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chedda"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur la Chedda -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Chedda is a traditional bridal dress from Tlemcen, known for its luxurious velvet fabric and intricate gold embroidery. Worn during weddings, it is often paired with a conical headdress and elaborate jewelry, symbolizing the bride's elegance."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Carte : Blouza -->
+                <LinearLayout
+                    android:id="@+id/blouza_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Conteneur pour le titre et le paragraphe (à gauche) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Blouza"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur la Blouza -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Blouza is a traditional dress from Oran, known for its vibrant colors and loose fit. Often made of silk or satin, it is decorated with embroidery or lace and worn during festive events in western Algeria."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image de la Blouza (à droite) -->
+                    <ImageView
+                        android:id="@+id/blouza_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bou"
+                        android:contentDescription="Blouza Image" />
+                </LinearLayout>
+
+                <!-- Carte : Karakou -->
+                <LinearLayout
+                    android:id="@+id/karakou_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Image du Karakou (à gauche) -->
+                    <ImageView
+                        android:id="@+id/karakou_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/karako"
+                        android:contentDescription="Karakou Image" />
+
+                    <!-- Conteneur pour le titre et le paragraphe (à droite) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Karakou"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur le Karakou -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Karakou is a traditional jacket from Algiers, often made of velvet and adorned with intricate gold embroidery. It is typically worn by women during special occasions and weddings, paired with a long skirt called a Fouta, symbolizing elegance and heritage."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Carte : Hayek -->
+                <LinearLayout
+                    android:id="@+id/hayek_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Conteneur pour le titre et le paragraphe (à gauche) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hayek"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur le Hayek -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Hayek is a traditional white veil worn by Algerian women, often used to cover the body modestly. Made of lightweight fabric, it is commonly worn in rural areas and during religious or cultural events."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image du Hayek (à droite) -->
+                    <ImageView
+                        android:id="@+id/hayek_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/hayak"
+                        android:contentDescription="Hayek Image" />
+                </LinearLayout>
+
+                <!-- Carte : Srwal Chaka -->
+                <LinearLayout
+                    android:id="@+id/srwal_chaka_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Image du Srwal Chaka (à gauche) -->
+                    <ImageView
+                        android:id="@+id/srwal_chaka_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sryal"
+                        android:contentDescription="Srwal Chaka Image" />
+
+                    <!-- Conteneur pour le titre et le paragraphe (à droite) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Srwal Chaka"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur le Srwal Chaka -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Srwal Chaka is a traditional pair of wide trousers often worn by Algerian women in the eastern regions. Typically made of patterned fabric, it is paired with a tunic and worn during celebrations or daily activities."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Carte : Kabylia Dress (position inversée : texte à gauche, image à droite) -->
+                <LinearLayout
+                    android:id="@+id/kabylia_dress_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Conteneur pour le titre et le paragraphe (à gauche) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kabylia Dress"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur la Kabylia Dress -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Kabylia Dress, also known as Takbaylit, is a traditional garment worn by Berber women in the Kabylie region. It is characterized by its vibrant colors, intricate woven patterns, and is often accessorized with silver jewelry, reflecting the rich cultural heritage of the area."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image de la Kabylia Dress (à droite) -->
+                    <ImageView
+                        android:id="@+id/kabylia_dress_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/kbayle"
+                        android:contentDescription="Kabylia Dress Image" />
+                </LinearLayout>
+                <!-- Nouvelle carte : Chaouia Dress (style comme Srwal Chaka : image à gauche, texte à droite) -->
+                <LinearLayout
+                    android:id="@+id/chaouia_dress_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Image de la Chaouia Dress (à gauche) -->
+                    <ImageView
+                        android:id="@+id/chaouia_dress_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/chawi"
+                        android:contentDescription="Chaouia Dress Image" />
+
+                    <!-- Conteneur pour le titre et le paragraphe (à droite) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chaouia Dress"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur la Chaouia Dress -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Chaouia Dress is a traditional garment worn by women in the Aurès region of eastern Algeria. Known for its bold patterns and vibrant colors, it often features wide trousers similar to the Srwal Chaka, paired with a tunic. This dress is typically worn during celebrations and reflects the Chaouia people's deep connection to their cultural roots."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Nouvelle carte : Nayli Dress (style comme Kabylia Dress : texte à gauche, image à droite) -->
+                <LinearLayout
+                    android:id="@+id/nayli_dress_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Conteneur pour le titre et le paragraphe (à gauche) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nayli Dress"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur la Nayli Dress -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Nayli Dress is a traditional garment worn by women in the region of Annaba, known for its elegance and intricate designs. Similar to the Kabylia Dress, it features vibrant colors and woven patterns, often accessorized with gold jewelry. This dress is commonly worn during festive occasions, showcasing the rich heritage of the Nayli culture."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image de la Nayli Dress (à droite) -->
+                    <ImageView
+                        android:id="@+id/nayli_dress_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/nayli"
+                        android:contentDescription="Nayli Dress Image" />
+                </LinearLayout>
+
+                <!-- Nouvelle carte : Sahara Dress (style comme Srwal Chaka : image à gauche, texte à droite) -->
+                <LinearLayout
+                    android:id="@+id/sahara_dress_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Image de la Sahara Dress (à gauche) -->
+                    <ImageView
+                        android:id="@+id/sahara_dress_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sra"
+                        android:contentDescription="Sahara Dress Image" />
+
+                    <!-- Conteneur pour le titre et le paragraphe (à droite) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sahara Dress"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur la Sahara Dress -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Sahara Dress is a traditional garment worn by women in the Saharan regions of southern Algeria. Designed for the desert climate, it often includes loose, flowing fabrics like the Srwal Chaka, paired with a lightweight tunic. Decorated with subtle embroidery, this dress is both practical and symbolic of the Saharan nomadic heritage."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Carte : Men's Heritage Clothing -->
+                <LinearLayout
+                    android:id="@+id/mens_heritage_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="#FFFFFF"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    tools:ignore="DuplicateIds,SpeakableTextPresentCheck,TouchTargetSizeCheck">
+                    <!-- Contenu inchangé -->
+                </LinearLayout>
+
+                <!-- Carte : Men's Heritage Clothing -->
+                <LinearLayout
+                    android:id="@+id/mens_heritage_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    tools:ignore="DuplicateIds">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Men's Heritage Clothing"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur les vêtements patrimoniaux des hommes -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian men's heritage clothing reflects both practicality and cultural significance. The Burnous, a hooded woolen cloak, is a prominent garment, often worn in desert regions for protection against the climate. During celebrations, men may wear the Djebba, a long tunic, often paired with a Chechia, a traditional red cap, showcasing Algeria's rich traditions."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Carte : Kachabia -->
+                <LinearLayout
+                    android:id="@+id/kachabia_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Image de la Kachabia (à gauche) -->
+                    <ImageView
+                        android:id="@+id/kachabia_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/coustim"
+                        android:contentDescription="Kachabia Image" />
+
+                    <!-- Conteneur pour le titre et le paragraphe (à droite) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kachabia"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur la Kachabia -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Kachabia is a traditional woolen cloak worn by Algerian men, particularly in rural and mountainous regions. Known for its warmth and durability, it is often brown or striped and provides protection against harsh weather conditions."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Carte : Burnous -->
+                <LinearLayout
+                    android:id="@+id/burnous_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Conteneur pour le titre et le paragraphe (à gauche) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp">
+
+                        <!-- Titre du paragraphe -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Burnous"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Paragraphe sur le Burnous -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="The Burnous is a traditional hooded cloak worn by Algerian men, often made of wool. It is a symbol of status and is commonly worn in desert regions for protection against the climate, especially during celebrations and cultural events."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image du Burnous (à droite) -->
+                    <ImageView
+                        android:id="@+id/burnous_image"
+                        android:layout_width="120dp"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/brnouse"
+                        android:contentDescription="Burnous Image" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <!-- Sidebar (Navigation Drawer) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="#FFFFFF" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

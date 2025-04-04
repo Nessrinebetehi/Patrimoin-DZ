@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_musique"
+        android:icon="@drawable/ic_music"
+        android:title="Algerian Music" />
+    <item
+        android:id="@+id/nav_vetements"
+        android:icon="@drawable/ic_clothing"
+        android:title="Algerian Clothing" />
+    <item
+        android:id="@+id/nav_traditions"
+        android:icon="@drawable/ic_traditions"
+        android:title="Algerian Traditions" />
+    <item
+        android:id="@+id/nav_cuisine"
+        android:icon="@drawable/ic_food"
+        android:title="Algerian Cuisine" />
+    <item
+        android:id="@+id/nav_architecture"
+        android:icon="@drawable/ic_architecture"
+        android:title="Architecture " />
+    <item
+        android:id="@+id/nav_linguistique"
+        android:icon="@drawable/ic_language"
+        android:title="Linguistic and Literary Heritage" />
+    <item
+        android:id="@+id/nav_fetes"
+        android:icon="@drawable/ic_celebration"
+        android:title="Statistique " />
+    <item
+        android:id="@+id/nav_patrAI"
+        android:icon="@drawable/ic_ai"
+        android:title="PatrAI" />
+</menu>

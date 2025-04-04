@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "688535826172",
+    "project_id": "patrimoin-dz",
+    "storage_bucket": "patrimoin-dz.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688535826172:android:7c0664dce3d19c20ccf179",
+        "android_client_info": {
+          "package_name": "com.example.patrimoin_dz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXYJnPiHx_0pO-6yscI_X3GZKIHFjEhEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

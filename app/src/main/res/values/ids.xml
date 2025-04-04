@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="register_button" type="id" />
+    <item name="sign_in_button" type="id" />
+    <item name="slider_title" type="id" />
+    <item name="slider_description" type="id" />
+    <item name="yennayer_slider" type="id" />
+    <item name="yennayer_circle_indicator" type="id" />
+    <item name="yennayer_card" type="id" />
+    <item name="griwiche_title" type="id" />
+    <item name="griwiche_card" type="id" />
+    <item name="rroubia_title" type="id" />
+    <item name="rroubia_card" type="id" />
+    <item name="image_casbah" type="id" />
+    <item name="image_roman_ruins" type="id" />
+    <item name="image_ksour" type="id" />
+    <item name="image_mosques" type="id" />
+    <item name="image_tassili" type="id" />
+    <item name="image_constantine_bridges" type="id" />
+    <item name="text_constantine_bridges" type="id" />
+    <item name="image_mansourah" type="id" />
+    <item name="text_roman_ruins" type="id" />
+    <item name="nav_clothing" type="id" />
+    <item name="nav_linguistic" type="id" />
+    <item name="chart_international_arrivals" type="id" />
+    <item name="chart_countries_origin" type="id" />
+    <item name="chart_domestic_tourism" type="id" />
+    <item name="video_sahraoui_dance" type="id" />
+    <item name="video_kabyle_dance" type="id" />
+    <item name="video_ouled_nail_dance" type="id" />
+</resources>

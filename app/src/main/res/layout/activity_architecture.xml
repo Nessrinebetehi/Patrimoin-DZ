@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#468C8A">
+
+        <!-- Toolbar (header) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:title="Architecture and Historical Sites"
+            app:titleTextColor="#468C8A">
+
+            <!-- Bouton Login dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Login"
+                android:padding="8dp"
+                android:src="@drawable/ic_login"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!-- Bouton Exit dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/exit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Exit"
+                android:padding="8dp"
+                android:src="@drawable/ic_close"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Contenu principal avec ScrollView pour gérer le défilement -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Slider pour les images -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/architecture_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp" />
+
+                <!-- Indicateurs de pagination pour le slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/architecture_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@android:drawable/presence_online"
+                    app:ci_drawable_unselected="@android:drawable/presence_invisible"
+                    app:ci_height="8dp"
+                    app:ci_width="8dp"
+                    app:ci_margin="4dp" />
+
+                <!-- Paragraphe sur l'architecture en Algérie -->
+                <TextView
+                    android:id="@+id/architecture_paragraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Algerian architecture is a fascinating blend of history and culture, reflecting the influences of Berber, Roman, Islamic, and French colonial periods. From the ancient rock art of Tassili n'Ajjer to the Roman ruins of Tipaza and Djemila, the country boasts a rich archaeological heritage. The Casbah of Algiers, a UNESCO World Heritage site, showcases intricate Islamic design with its narrow streets and Ottoman-style buildings. In contrast, colonial architecture is evident in the grand boulevards and European-style structures of cities like Constantine and Oran, making Algeria a living museum of architectural diversity."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <!-- Image 1: Casbah of Algiers -->
+                <ImageView
+                    android:id="@+id/image_casbah"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kasba"
+                    android:contentDescription="Casbah of Algiers" />
+                <TextView
+                    android:id="@+id/text_casbah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ℹ️ The Casbah of Algiers, a UNESCO World Heritage site, is a historic Ottoman old town perched on the hills overlooking the Mediterranean. Dating back to the 10th century, this labyrinth of narrow, winding streets is a testament to centuries of cultural exchange between Berber, Arab, and Ottoman influences. Its whitewashed houses, mosques, and palaces feature intricate tilework, arched doorways, and wooden balconies, embodying traditional Islamic architecture. Despite facing challenges like modernization and neglect, the Casbah remains a living relic, offering a glimpse into Algeria’s rich past and its resilient urban heritage."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- Image 2: Roman Ruins -->
+                <ImageView
+                    android:id="@+id/image_roman_ruins"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/roman" />
+                <TextView
+                    android:id="@+id/text_roman_ruins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ℹ️ The Roman ruins of Algeria, including Timgad, Djemila, and Tipaza, are extraordinary remnants of the Roman Empire’s presence in North Africa from the 1st to the 5th centuries. Timgad, known as the 'Pompeii of Africa,' boasts a grid layout with a triumphal arch, basilica, and theater. Djemila, nestled in the mountains, features stunning temples and mosaics, while Tipaza, along the coast, blends Roman structures with the natural beauty of the Mediterranean. These sites highlight Roman engineering prowess and offer insight into the daily life, religion, and culture of this ancient civilization."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- Image 3: Ksour -->
+                <ImageView
+                    android:id="@+id/image_ksour"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kasor" />
+                <TextView
+                    android:id="@+id/text_ksour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ℹ️ Ksour are fortified villages scattered across southern Algeria’s Sahara Desert, including notable examples like Ghardaïa and Timimoun. Constructed from mud bricks and palm wood, these settlements date back centuries and were designed to protect inhabitants from harsh desert conditions and invaders. Their unique architecture features thick walls, flat roofs, and intricate layouts with communal granaries and mosques. The M’Zab Valley’s ksour, a UNESCO site, exemplify this blend of functionality and beauty, reflecting the ingenuity of Berber communities in adapting to their arid environment."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- Image 4: Mosques -->
+                <ImageView
+                    android:id="@+id/image_mosques"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/moski" />
+                <TextView
+                    android:id="@+id/text_mosques"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ℹ️ Algerian mosques, such as the Great Mosque of Algiers and Ketchaoua Mosque, are architectural masterpieces that fuse Islamic design with local and historical influences. The Great Mosque, built in the 11th century, features a vast prayer hall and a towering minaret adorned with Almoravid-style arches. Ketchaoua Mosque, originally constructed in 1612 and later modified during French colonial rule, showcases a blend of Ottoman and European elements with its ornate domes and intricate tilework. These sacred spaces serve as cultural landmarks, symbolizing Algeria’s deep Islamic heritage and artistic legacy."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- Image 5: Tassili n’Ajjer -->
+                <ImageView
+                    android:id="@+id/image_tassili"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tasili"
+                    android:contentDescription="Tassili n’Ajjer" />
+                <TextView
+                    android:id="@+id/text_tassili"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ℹ️ Tassili n’Ajjer, located in Algeria’s southeastern Sahara, is a UNESCO World Heritage site renowned for its prehistoric rock art, dating back over 10,000 years. Spanning a vast plateau, it contains thousands of paintings and engravings depicting animals, humans, and scenes of a once-lush environment, offering a window into the Neolithic era before the region turned to desert. The site’s dramatic rock formations and canyons enhance its mystique, making it a treasure trove for archaeologists and a testament to humanity’s early artistic expression in North Africa."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- Image 6: Constantine Suspension Bridges -->
+                <ImageView
+                    android:id="@+id/image_constantine_bridges"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/costonti"
+                    android:contentDescription="Constantine Suspension Bridges" />
+                <TextView
+                    android:id="@+id/text_constantine_bridges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ℹ️ The suspension bridges of Constantine, often called the 'City of Bridges,' are an engineering marvel from the colonial era, spanning the deep gorges of the Rhumel River. Built between the 19th and 20th centuries, bridges like Sidi M’Cid and Mellah Slimane connect the city’s steep cliffs, blending French design with the natural landscape. These structures not only facilitated urban growth but also became iconic symbols of Constantine’s identity, offering breathtaking views and a striking contrast to the older Islamic architecture of the region."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- Image 7: Mansourah -->
+                <ImageView
+                    android:id="@+id/image_mansourah"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mansora"
+                    android:contentDescription="Mansourah Mosque" />
+                <TextView
+                    android:id="@+id/text_mansourah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ℹ️ The Mansourah Mosque in Tlemcen is a magnificent example of Almohad architecture from the 13th century, built during the reign of the Marinid dynasty. Its most striking feature is the 40-meter-high minaret, adorned with geometric patterns and horseshoe arches typical of the period. The mosque was part of a larger complex that included a hospital and school, reflecting Tlemcen’s role as a cultural and intellectual center. Though partially in ruins, Mansourah stands as a powerful reminder of Algeria’s Islamic golden age and its architectural sophistication."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <!-- Conclusion sur l'architecture algérienne dans une carte blanche -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <TextView
+                        android:id="@+id/architecture_conclusion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="In conclusion, Algerian architecture is a remarkable tapestry woven from the threads of diverse civilizations—Berber, Roman, Islamic, and French. From the ancient rock art of Tassili n’Ajjer to the colonial bridges of Constantine, each structure tells a story of adaptation, creativity, and resilience. These architectural wonders, whether preserved in ruins or thriving in modern cities, reflect Algeria’s unique identity as a crossroads of history and culture, inviting the world to explore its enduring legacy."
+                        android:textColor="#468C8A"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Sidebar (Navigation Drawer) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="#FFF5E6"
+        app:itemIconTint="#FFFFFF" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

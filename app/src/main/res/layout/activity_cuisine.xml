@@ -1,0 +1,1281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar (header) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:title="Algerian Cuisine"
+            app:titleTextColor="#468C8A">
+
+            <!-- Bouton Login dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Login"
+                android:padding="8dp"
+                android:src="@drawable/ic_login"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!-- Bouton Exit dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/exit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Exit"
+                android:padding="8dp"
+                android:src="@drawable/ic_close"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Contenu principal avec ScrollView pour gérer le défilement -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#468C8A"
+            tools:ignore="SpeakableTextPresentCheck">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Image qui prend toute la largeur et a une hauteur de 200dp -->
+                <ImageView
+                    android:id="@+id/cuisine_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/cuizin"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Algerian Cuisine Image" />
+
+                <!-- Paragraphe visible dès le départ -->
+                <TextView
+                    android:id="@+id/cuisine_paragraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Algerian cuisine is a vibrant reflection of the country's rich history and cultural diversity. Influenced by Berber, Arab, Ottoman, and French traditions, it features a variety of dishes that are both flavorful and hearty. Staples like couscous, often served with vegetables and meat, are a cornerstone of Algerian meals. Other popular dishes include shakshuka, a spiced egg and tomato dish, and mechoui, a slow-roasted lamb. Desserts such as baklava and makroud, made with dates and honey, showcase the sweet side of Algerian culinary heritage."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <!-- Slider pour les images -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/cuisine_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp" />
+
+                <!-- Indicateurs de pagination pour le slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/cuisine_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@android:drawable/presence_online"
+                    app:ci_drawable_unselected="@android:drawable/presence_invisible"
+                    app:ci_height="8dp"
+                    app:ci_width="8dp"
+                    app:ci_margin="4dp" />
+
+                <!-- Petit paragraphe sur les plats traditionnels et gâteaux -->
+                <TextView
+                    android:id="@+id/traditional_dishes_paragraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Algerian traditional dishes are a celebration of flavors and heritage. Couscous, often paired with a rich stew, is a beloved staple across the country. Chorba, a hearty soup with freekeh or vermicelli, warms the soul during festive occasions. For sweets, Algerians enjoy gâteaux like makroud, a date-filled pastry soaked in honey, and kalb el louz, a semolina cake infused with orange blossom water, especially during Ramadan and Eid celebrations."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <!-- Grand titre "Traditional Dishes" -->
+                <TextView
+                    android:id="@+id/traditional_dishes_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Traditional Dishes"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Couscous -->
+                <LinearLayout
+                    android:id="@+id/couscous_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Couscous"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Couscous is a cornerstone of Algerian cuisine, often considered the national dish. Made from steamed semolina grains, it is typically served with a rich stew of vegetables, meat (such as lamb or chicken), and aromatic spices like saffron and cinnamon. During family gatherings and celebrations, couscous brings people together, symbolizing unity and tradition."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/couscous_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/couscous"
+                        android:contentDescription="Couscous Image" />
+                </LinearLayout>
+
+                <!-- Titre pour la vidéo du Couscous -->
+                <TextView
+                    android:id="@+id/couscous_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="How to Make Couscous"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Conteneur pour la vidéo et le bouton du Couscous -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="4dp">
+
+                    <!-- Vidéo du Couscous -->
+                    <VideoView
+                        android:id="@+id/couscous_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+
+                    <!-- Bouton pour jouer/mettre en pause la vidéo du Couscous -->
+                    <Button
+                        android:id="@+id/play_pause_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:text="Play"
+                        android:backgroundTint="#468C8A"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Carte : Chorba Frik -->
+                <LinearLayout
+                    android:id="@+id/chorba_frik_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chorba Frik"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Chorba Frik is a traditional Algerian soup, especially popular during Ramadan. This hearty dish is made with frik (cracked green wheat), tomatoes, meat (often lamb), and a blend of spices like coriander and mint. It is typically garnished with fresh cilantro and a squeeze of lemon, offering a comforting and flavorful experience."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/chorba_frik_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/chrba"
+                        android:contentDescription="Chorba Frik Image" />
+                </LinearLayout>
+
+                <!-- Titre pour la vidéo de Chorba Frik -->
+                <TextView
+                    android:id="@+id/chorba_frik_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="How to Make Chorba Frik"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Conteneur pour la vidéo et le bouton de Chorba Frik -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="4dp">
+
+                    <!-- Vidéo de Chorba Frik -->
+                    <VideoView
+                        android:id="@+id/chorba_frik_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+
+                    <!-- Bouton pour jouer/mettre en pause la vidéo de Chorba Frik -->
+                    <Button
+                        android:id="@+id/chorba_frik_play_pause_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:text="Play"
+                        android:backgroundTint="#468C8A"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Carte : Mhajeb -->
+                <LinearLayout
+                    android:id="@+id/mhajeb_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mhajeb"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mhajeb, also known as Mahjouba, is a popular Algerian street food made from thin semolina dough stuffed with a spicy filling, typically a mixture of tomatoes, onions, and harissa. The dough is folded into a square and cooked on a griddle until crispy and golden. This savory treat is loved for its bold flavors and satisfying texture."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/mhajeb_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mhajab"
+                        android:contentDescription="Mhajeb Image" />
+                </LinearLayout>
+
+                <!-- Titre pour la vidéo de Mhajeb -->
+                <TextView
+                    android:id="@+id/mhajeb_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="How to Make Mhajeb"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Conteneur pour la vidéo et le bouton de Mhajeb -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="4dp">
+
+                    <!-- Vidéo de Mhajeb -->
+                    <VideoView
+                        android:id="@+id/mhajeb_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+
+                    <!-- Bouton pour jouer/mettre en pause la vidéo de Mhajeb -->
+                    <Button
+                        android:id="@+id/mhajeb_play_pause_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:text="Play"
+                        android:backgroundTint="#468C8A"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Carte : Bourak -->
+                <LinearLayout
+                    android:id="@+id/bourak_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bourak"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Bourak, also known as Borek, is a beloved Algerian appetizer often served during Ramadan and special occasions. It consists of thin pastry sheets (dioul) wrapped around a savory filling, typically made with ground meat, cheese, or potatoes, and then fried until crispy and golden. Bourak is a delightful combination of flaky texture and rich flavors."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/bourak_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bourake"
+                        android:contentDescription="Bourak Image" />
+                </LinearLayout>
+
+                <!-- Titre pour la vidéo de Bourak -->
+                <TextView
+                    android:id="@+id/bourak_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="How to Make Bourak"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Conteneur pour la vidéo et le bouton de Bourak -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="4dp">
+
+                    <!-- Vidéo de Bourak -->
+                    <VideoView
+                        android:id="@+id/bourak_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+
+                    <!-- Bouton pour jouer/mettre en pause la vidéo de Bourak -->
+                    <Button
+                        android:id="@+id/bourak_play_pause_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:text="Play"
+                        android:backgroundTint="#468C8A"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Carte : Zitoune -->
+                <LinearLayout
+                    android:id="@+id/zitoune_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tajine Zitoun"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tajine Zitoun is a classic Algerian dish featuring tender meat (often chicken or lamb) cooked with green olives in a fragrant sauce. The dish is flavored with a blend of spices like turmeric, ginger, and saffron, and often includes preserved lemons for a tangy kick. Tajine Zitoun is a comforting and aromatic meal, perfect for family gatherings."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/zitoune_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/zitone"
+                        android:contentDescription="Zitoune Image" />
+                </LinearLayout>
+
+                <!-- Titre pour la vidéo de Zitoune -->
+                <TextView
+                    android:id="@+id/zitoune_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="How to Make Zitoune"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Conteneur pour la vidéo et le bouton de Zitoune -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="4dp">
+
+                    <!-- Vidéo de Zitoune -->
+                    <VideoView
+                        android:id="@+id/zitoune_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+
+                    <!-- Bouton pour jouer/mettre en pause la vidéo de Zitoune -->
+                    <Button
+                        android:id="@+id/zitoune_play_pause_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:text="Play"
+                        android:backgroundTint="#468C8A"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Carte : Rechta -->
+                <LinearLayout
+                    android:id="@+id/rechta_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rechta"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rechta is a traditional Algerian dish featuring handmade noodles served with a fragrant, spiced broth. Often prepared for special occasions, it typically includes tender chicken or lamb, chickpeas, and vegetables like zucchini and turnips. The dish is seasoned with cinnamon and other warm spices, making it a comforting and flavorful meal."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/rechta_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/rechta"
+                        android:contentDescription="Rechta Image" />
+                </LinearLayout>
+
+                <!-- Titre pour la vidéo de Rechta -->
+                <TextView
+                    android:id="@+id/rechta_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="How to Make Rechta"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Conteneur pour la vidéo et le bouton de Rechta -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="4dp">
+
+                    <!-- Vidéo de Rechta -->
+                    <VideoView
+                        android:id="@+id/rechta_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+
+                    <!-- Bouton pour jouer/mettre en pause la vidéo de Rechta -->
+                    <Button
+                        android:id="@+id/rechta_play_pause_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:text="Play"
+                        android:backgroundTint="#468C8A"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Carte : Tajine Hlou -->
+                <LinearLayout
+                    android:id="@+id/tajine_hlou_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tajine Hlou"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tajine Hlou is a traditional Algerian sweet and savory dish, often prepared for celebrations. It features tender meat (usually lamb) cooked with dried fruits like prunes, apricots, and raisins, in a rich, spiced syrup made with honey or sugar. The dish is flavored with cinnamon and orange blossom water, creating a delightful balance of flavors."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/tajine_hlou_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/hlou"
+                        android:contentDescription="Tajine Hlou Image" />
+                </LinearLayout>
+
+                <!-- Titre pour la vidéo de Tajine Hlou -->
+                <TextView
+                    android:id="@+id/tajine_hlou_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="How to Make Tajine Hlou"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Conteneur pour la vidéo et le bouton de Tajine Hlou -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="4dp">
+
+                    <!-- Vidéo de Tajine Hlou -->
+                    <VideoView
+                        android:id="@+id/tajine_hlou_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+
+                    <!-- Bouton pour jouer/mettre en pause la vidéo de Tajine Hlou -->
+                    <Button
+                        android:id="@+id/tajine_hlou_play_pause_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:text="Play"
+                        android:backgroundTint="#468C8A"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <!-- Paragraphe sur les gâteaux algériens -->
+                <TextView
+                    android:id="@+id/algerian_sweets_paragraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Algerian sweets, known as 'gâteaux,' are an integral part of the country's culinary tradition, often enjoyed during festive occasions like Eid and weddings. Popular treats include makroud, a semolina pastry filled with dates and soaked in honey, and kalb el louz, a rich semolina cake flavored with orange blossom water. Other favorites like baklava and griwech, a crispy, honey-dipped pastry, highlight the use of nuts, honey, and aromatic spices, offering a delightful end to any meal."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <!-- Titre pour le slider des gâteaux -->
+                <TextView
+                    android:id="@+id/gateaux_slider_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Algerian Gâteaux"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Slider pour les images des gâteaux -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/gateaux_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp" />
+
+                <!-- Indicateurs de pagination pour le slider des gâteaux -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/gateaux_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@android:drawable/presence_online"
+                    app:ci_drawable_unselected="@android:drawable/presence_invisible"
+                    app:ci_height="8dp"
+                    app:ci_width="8dp"
+                    app:ci_margin="4dp" />
+
+                <!-- Grand titre "Mbesess" -->
+                <TextView
+                    android:id="@+id/mbesess_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Mbesess"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Mbesess -->
+                <LinearLayout
+                    android:id="@+id/mbesess_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mbesess"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mbesess is a traditional Algerian sweet treat, often enjoyed during festive occasions and family gatherings. This delightful dessert is made from a dough of semolina and butter, which is then fried until golden and crispy. It is typically soaked in a fragrant honey syrup infused with orange blossom water, giving it a rich and aromatic flavor. Mbesess is loved for its crunchy texture and sweet, floral notes, making it a perfect accompaniment to a cup of mint tea."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/mbesess_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mbesas"
+                        android:contentDescription="Mbesess Image" />
+                </LinearLayout>
+
+                <!-- Grand titre "Barir Algérien" -->
+                <TextView
+                    android:id="@+id/barir_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Barir Algérien"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Barir Algérien -->
+                <LinearLayout
+                    android:id="@+id/barir_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Barir Algérien"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Barir Algérien, also known as Algerian shortbread, is a traditional pastry often prepared for special occasions and celebrations. Made with a simple dough of flour, butter, and sugar, these delicate cookies are sometimes flavored with vanilla or lemon zest. After baking, they are dusted with powdered sugar, giving them a melt-in-the-mouth texture. Barir Algérien is a beloved treat, often enjoyed with a cup of coffee or tea during festive gatherings."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/barir_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bardi"
+                        android:contentDescription="Barir Algérien Image" />
+                </LinearLayout>
+
+                <!-- Grand titre "Sfanj Algérien" -->
+                <TextView
+                    android:id="@+id/sfanj_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Sfanj Algérien"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Sfanj Algérien -->
+                <LinearLayout
+                    android:id="@+id/sfanj_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sfanj Algérien"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sfanj Algérien, also known as Algerian doughnuts, is a popular street food and breakfast treat across Algeria. These fluffy, deep-fried pastries are made from a simple yeast dough, often flavored with a hint of orange blossom water or vanilla. After frying, they are typically dipped in sugar syrup or sprinkled with granulated sugar, offering a light and airy texture with a sweet, aromatic finish. Sfanj is often enjoyed fresh and warm, paired with a cup of coffee or tea."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/sfanj_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sfanj"
+                        android:contentDescription="Sfanj Algérien Image" />
+                </LinearLayout>
+
+                <!-- Grand titre "Makrout Algérien" -->
+                <TextView
+                    android:id="@+id/makrout_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Makrout Algérien"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Makrout Algérien -->
+                <LinearLayout
+                    android:id="@+id/makrout_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Makrout Algérien"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Makrout Algérien is a traditional Algerian pastry, widely cherished during festive occasions like Eid and weddings. This delectable treat is made from a semolina dough filled with a sweet date paste, often flavored with orange blossom water or cinnamon. After being shaped into diamond pieces, it is deep-fried until golden and then soaked in a warm honey syrup, giving it a rich, sticky texture. Makrout is a perfect balance of nutty semolina and sweet dates, making it a beloved dessert across Algeria."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/makrout_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mmmm"
+                        android:contentDescription="Makrout Algérien Image" />
+                </LinearLayout>
+
+                <!-- Grand titre "Makrout Louz Algérien" -->
+                <TextView
+                    android:id="@+id/makrout_louz_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Makrout Louz Algérien"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Makrout Louz Algérien -->
+                <LinearLayout
+                    android:id="@+id/makrout_louz_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Makrout Louz Algérien"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Makrout Louz Algérien is a delicate Algerian pastry, often prepared for special occasions such as Eid and weddings. Unlike the traditional Makrout, this version is made with almond paste (louz) instead of dates, giving it a distinct nutty flavor. The dough is typically flavored with orange blossom water, shaped into small diamond pieces, and then baked until golden. After baking, Makrout Louz is dusted with powdered sugar or lightly glazed, offering a melt-in-the-mouth texture that pairs perfectly with a cup of tea."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/makrout_louz_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mmkk"
+                        android:contentDescription="Makrout Louz Algérien Image" />
+                </LinearLayout>
+
+                <!-- Grand titre "Griwiche" -->
+                <TextView
+                    android:id="@+id/griwiche_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Griwiche"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Griwiche -->
+                <LinearLayout
+                    android:id="@+id/griwiche_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Griwiche"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Griwiche is a traditional Algerian pastry renowned for its intricate shape and crispy texture. Made from a thin dough, it is skillfully shaped into flower-like patterns, deep-fried until golden, and then soaked in a fragrant honey syrup. Often sprinkled with sesame seeds, Griwiche offers a delightful crunch and a sweet, floral taste, making it a popular treat during festive occasions like Eid and weddings."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/griwiche_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/griwach"
+                        android:contentDescription="Griwiche Image" />
+                </LinearLayout>
+
+                <!-- Grand titre "Rroubia" -->
+                <TextView
+                    android:id="@+id/rroubia_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Rroubia"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Rroubia -->
+                <LinearLayout
+                    android:id="@+id/rroubia_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rroubia"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rroubia is a delicate Algerian pastry cherished for its light, flaky layers and sweet flavor. Made with thin sheets of dough, it is typically filled with a mixture of ground almonds or pistachios, then folded and baked or fried. After preparation, Rroubia is generously soaked in honey syrup, often infused with orange blossom water, offering a rich, aromatic taste that makes it a favorite during celebrations and family gatherings."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/roubia_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ribiya"
+                        android:contentDescription="Rroubia Image" />
+                </LinearLayout>
+
+                <!-- Grand titre "Mchewek" -->
+                <TextView
+                    android:id="@+id/mchewek_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Mchewek"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Carte : Mchewek -->
+                <LinearLayout
+                    android:id="@+id/mchewek_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mchewek"
+                            android:textColor="#C19A6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mchewek is a traditional Algerian sweet, popular during festive occasions like Eid and weddings. Made from a rich almond paste mixed with sugar and a hint of orange blossom water, these treats are shaped into small balls and often topped with a cherry or whole almond. After baking, Mchewek is lightly dusted with powdered sugar, offering a tender, nutty texture and a delicate sweetness that pairs wonderfully with tea or coffee."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/mchewek_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mchawak"
+                        android:contentDescription="Mchewek Image" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Sidebar (Navigation Drawer) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="#FFF5E6"
+        app:itemIconTint="#FFFFFF" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#468C8A">
+
+        <!-- Toolbar (header) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:title="Linguistic and Literary Heritage"
+            app:titleTextColor="#468C8A">
+
+            <!-- Bouton Login dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Login"
+                android:padding="8dp"
+                android:src="@drawable/ic_login"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!-- Bouton Exit dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/exit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Exit"
+                android:padding="8dp"
+                android:src="@drawable/ic_close"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Contenu principal avec ScrollView pour gérer le texte -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Titre principal -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exploring Algeria's Linguistic and Literary Heritage"
+                    android:textColor="#C19A6B"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Explication générale -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="The linguistic and literary heritage is a cultural treasure:\n\n- **Tamazight**: The Berber language with its dialects (Kabyle, Chaoui, Mozabite), a cornerstone of Algeria's indigenous identity.\n- **Dialectal Arabic**: Algerian Darija, rich in proverbs and expressions, reflecting everyday life and wisdom.\n- **Poetry**: Melhoun (popular sung poetry) and Andalusian poetry, blending rhythm and emotion in traditional forms.\n- **Folktales**: Oral stories like those of Djeha, a witty folkloric character, passed down through generations.\n- **Modern Literature**: Works by Kateb Yacine and Assia Djebar, showcasing Algeria’s contemporary literary voice on the global stage."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Titre des écrivains -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notable Algerian Writers"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Kateb Yacine -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+                    <ImageView
+                        android:id="@+id/image_kateb_yacine"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/katib"
+                        android:contentDescription="Kateb Yacine" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:text="**Kateb Yacine (1929–1989)**: A prominent Algerian writer and playwright, best known for his novel *Nedjma*, which explores identity, colonialism, and resistance. Writing in French, he blended poetic language with political themes, making him a key figure in postcolonial literature."
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Mouloud Feraoun -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+                    <ImageView
+                        android:id="@+id/image_mouloud_feraoun"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/kati"
+                        android:contentDescription="Mouloud Feraoun" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:text="**Mouloud Feraoun (1913–1962)**: A Kabyle writer and educator, celebrated for *The Poor Man’s Son*, an autobiographical novel about Berber life under French rule. His works highlight social issues and cultural resilience, tragically cut short by his assassination during the Algerian War."
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Moufdi Zakaria -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+                    <ImageView
+                        android:id="@+id/image_moufdi_zakaria"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/kat"
+                        android:contentDescription="Moufdi Zakaria" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:text="**Moufdi Zakaria (1908–1977)**: A poet and nationalist, author of Algeria’s national anthem, *Kassaman*. His poetry, written in Arabic, inspired the independence movement with its passionate calls for freedom and dignity during the colonial era."
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Assia Djebar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+                    <ImageView
+                        android:id="@+id/image_assia_djebar"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ka"
+                        android:contentDescription="Assia Djebar" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:text="**Assia Djebar (1936–2015)**: An acclaimed novelist, filmmaker, and historian, known for *Women of Algiers in Their Apartment*. Writing in French, she explored women’s voices, history, and the complexities of Algerian identity, earning her international recognition."
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Conclusion -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="In conclusion, Algeria’s linguistic and literary heritage reflects a rich tapestry of traditions, resilience, and creativity. From ancient oral tales to modern masterpieces, it continues to inspire and connect generations, preserving the nation’s unique cultural identity."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="24dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Sidebar (Navigation Drawer) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="#FFF5E6"
+        app:itemIconTint="#FFFFFF" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

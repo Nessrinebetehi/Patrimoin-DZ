@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5E6">
+
+    <!-- Forme décorative en haut -->
+    <View
+        android:id="@+id/decorative_shape"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/shape_background"
+        android:layout_alignParentTop="true" />
+
+    <!-- Bouton de fermeture (X) en haut à droite -->
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Fermer"
+        android:elevation="10dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_close"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <!-- Conteneur principal pour le formulaire -->
+    <LinearLayout
+        android:id="@+id/form_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:clipToPadding="false">
+
+        <!-- Titre "Welcome Back" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#8B4513"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Champ Email -->
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Email"
+            android:padding="12dp"
+            android:textColor="#666666"
+            android:textColorHint="#999999"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <!-- Champ Password -->
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="#666666"
+            android:textColorHint="#999999"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <!-- Texte "Forgot Password" -->
+        <TextView
+            android:id="@+id/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Forgot Password"
+            android:textColor="#468C8A"
+            android:textSize="14sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <!-- Bouton "Sign In" -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:padding="12dp"
+                android:background="@drawable/button_background"
+                android:layout_marginEnd="8dp" />
+
+            <ImageButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_button_background"
+                android:src="@drawable/ic_arrow_forward"
+                android:contentDescription="Sign In"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <!-- Lien "Register" -->
+        <TextView
+            android:id="@+id/register_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Don't have an account? Register"
+            android:textColor="#468C8A"
+            android:textSize="14sp"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+</RelativeLayout>

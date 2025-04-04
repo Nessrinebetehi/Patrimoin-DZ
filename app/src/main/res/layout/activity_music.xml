@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal dans un ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/gradient_background">
+
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#FFFFFF"
+                android:elevation="4dp"
+                app:title="Algerian Music"
+                app:titleTextColor="#468C8A">
+
+                <ImageButton
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Login"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_login"
+                    android:visibility="visible" />
+
+                <ImageButton
+                    android:id="@+id/exit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Exit"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_close"
+                    android:visibility="visible"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <!-- Slider avec indicateurs -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/image_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/slider_dots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/image_slider"
+                    app:tabGravity="center"
+                    app:tabIndicatorColor="#FFFFFF"
+                    app:tabIndicatorHeight="4dp"
+                    app:tabMode="fixed"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </RelativeLayout>
+
+            <!-- Description générale -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <TextView
+                    android:id="@+id/music_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Algerian music embodies a profound and vibrant heritage, weaving together a rich tapestry of unique genres that echo the country’s storied history and cultural diversity. From the soulful melodies of the northern cities to the rhythmic chants of the vast Sahara, each musical tradition is a testament to the influences that have shaped Algeria over centuries—Berber roots, Arabo-Andalusian refinement, and the echoes of colonial encounters. Accompanied by traditional dances, these genres are far more than mere entertainment; they are living expressions of identity, resilience, and community. Whether it’s the poetic verses of Chaâbi resonating in the Casbah of Algiers or the hypnotic polyphony of Ahellil in the desert, Algerian music invites listeners into a world where history, emotion, and artistry converge, preserving a legacy that continues to evolve while remaining deeply rooted in its ancestral soil."
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:padding="16dp" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Titre des traditions musicales -->
+            <TextView
+                android:id="@+id/music_tradition_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Traditional Algerian Music"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:background="#468C8A" />
+
+            <!-- Section Raï -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_rai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/image_rai"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/khaled"
+                        android:scaleType="centerCrop" />
+                    <TextView
+                        android:id="@+id/text_rai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Raï, a genre that emerged from the bustling port city of Oran in the early 20th century, stands as one of Algeria’s most iconic contributions to global music. Born in the working-class neighborhoods and cabarets, Raï blends traditional Bedouin folk melodies with influences from Spanish flamenco, French cabaret, and later, modern pop and electronic beats. Originally a voice for the marginalized, its lyrics—often sung in a mix of Arabic and French—carry tales of love, rebellion, and social struggles, resonating with a spirit of defiance and freedom. Pioneers like Cheikha Rimitti and later stars such as Cheb Khaled and Cheb Mami brought Raï to international stages, transforming it into a symbol of Algerian identity that transcends borders. With its infectious rhythms and raw emotional depth, Raï remains a powerful reflection of Algeria’s ability to fuse tradition with modernity, creating a sound that is both timeless and revolutionary."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section Chaâbi -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_chaabi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/image_chaabi"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/tarabe"
+                        android:scaleType="centerCrop" />
+                    <TextView
+                        android:id="@+id/text_chaabi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chaâbi, meaning 'of the people,' is a soulful and poetic music genre that took root in the labyrinthine streets of Algiers’ Casbah in the early 20th century. Emerging from the Andalusian musical traditions brought to North Africa by Muslim and Jewish exiles from Spain, Chaâbi evolved into a distinctly Algerian art form under the guidance of masters like El Hadj M’hamed El Anka. Sung in colloquial Algerian Arabic, its lyrics weave intricate tales of love, loss, spirituality, and the everyday struggles of the working class, often accompanied by the melancholic strains of the mandole, oud, and derbouka. More than just music, Chaâbi is a cultural institution—a communal experience shared in cafés and weddings, where its hypnotic melodies and heartfelt poetry bind generations together. As a living archive of Algeria’s urban heritage, Chaâbi continues to inspire contemporary artists, preserving the essence of a nation’s soul through its timeless resonance."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section Malouf -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_malouf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/image_malouf"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/malouf"
+                        android:scaleType="centerCrop" />
+                    <TextView
+                        android:id="@+id/text_malouf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Malouf is a refined Andalusian music style that traces its origins to the courts of medieval Spain, brought to Algeria by exiles fleeing the Reconquista. Flourishing in cities like Constantine, Annaba, and Tlemcen, Malouf is characterized by its sophisticated melodies Higand poetic lyrics, often performed with instruments such as the kwitra, violin, and ney. This genre reflects a blend of Arab, Berber, and Mediterranean influences, offering a window into the cultural exchanges that have shaped North Africa. Traditionally performed in suites called 'nubat,' Malouf is both an art form and a spiritual experience, with its intricate compositions evoking themes of love, nature, and devotion. Preserved through oral tradition and formal training, Malouf remains a cherished emblem of Algeria’s classical heritage, bridging the past with the present in a harmonious celebration of beauty and refinement."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section Kabyle -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_kabyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/image_kabyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/alef"
+                        android:scaleType="centerCrop" />
+                    <TextView
+                        android:id="@+id/text_kabyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kabyle music, originating from the rugged mountains of the Kabylia region, is a powerful celebration of Berber identity and one of the oldest musical traditions in Algeria. Rooted in the ancient Tamazight language and culture, it reflects the resilience of a people who have preserved their heritage through centuries of change. Characterized by its evocative poetry and stirring melodies, Kabyle music often features instruments like the bendir, tbel, and mandole, creating a sound that is both haunting and uplifting. Legendary figures such as Lounès Matoub and Idir have used this music as a vehicle for storytelling and resistance, addressing themes of love, exile, and the fight for cultural recognition. Performed at village gatherings, protests, or festive celebrations, Kabyle music is a vital thread in the fabric of Algerian patrimony, embodying the spirit of a community fiercely proud of its roots while embracing the universal language of song."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section Ahellil -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_ahellil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/image_ahellil"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/kabil"
+                        android:scaleType="centerCrop" />
+                    <TextView
+                        android:id="@+id/text_ahellil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ahellil is an extraordinary polyphonic chant practiced by the Zenete Berbers of the Gourara region in southwestern Algeria, a tradition so unique and profound that it has been recognized by UNESCO as an Intangible Cultural Heritage of Humanity. Performed during communal ceremonies, such as weddings and religious festivals, Ahellil combines poetry, music, and dance into a mesmerizing ritual that dates back centuries. Its intricate vocal harmonies, supported by the rhythmic clapping of hands and the beat of drums, create a hypnotic soundscape that evokes the vastness of the Sahara. The lyrics, sung in the Zenete dialect, are rich with metaphors and spiritual reflections, celebrating life, nature, and the divine. More than a musical form, Ahellil is a collective expression of solidarity and memory, binding the community together in a shared heritage that has withstood the test of time and the harshness of the desert environment."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Titre des danses -->
+            <TextView
+                android:id="@+id/dance_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Traditional Algerian Dances"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:background="#468C8A" />
+
+            <!-- Description des danses -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <TextView
+                    android:id="@+id/dance_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Algerian dances are a dazzling showcase of the nation’s rich cultural mosaic, embodying centuries of tradition, regional diversity, and communal spirit. From the graceful movements of the Kabyle dances in the mountainous north to the hypnotic swaying of the Sahraoui performers in the boundless desert, each dance tells a story of its people—their joys, struggles, and connection to the land. Rooted in ancient Berber customs and enriched by Arab, Andalusian, and African influences, these performances are inseparable from the music that drives them, with rhythms dictating every step and gesture. Often performed during celebrations, rites of passage, or spiritual gatherings, Algerian dances are a living art form, passed down through generations as a means of preserving identity and honoring history. Whether adorned in vibrant costumes or accompanied by the beat of drums, these dances are a testament to Algeria’s enduring patrimony, where every movement is a bridge between past and present."
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:padding="16dp" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section Kabyle Dance -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_kabyle_dance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/kabyle_dance_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kabyle Dance"
+                        android:textColor="#468C8A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:padding="8dp" />
+                    <VideoView
+                        android:id="@+id/video_kabyle_dance"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <ImageButton
+                            android:id="@+id/play_kabyle_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:backgroundTint="#4CAF50"
+                            android:src="@drawable/ic_play"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/pause_kabyle_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#F44336"
+                            android:src="@drawable/ic_pause"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/stop_kabyle_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#9E9E9E"
+                            android:src="@drawable/ic_stop"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/fullscreen_kabyle_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#468C8A"
+                            android:src="@drawable/ic_fullscreen"
+                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/kabyle_dance_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The Kabyle dance is a vibrant and rhythmic performance rooted in the traditions of the Kabylia region, where the Berber people have thrived for millennia. Accompanied by the soulful strains of Kabyle music, this dance features synchronized steps and graceful movements that reflect the harmony of community life in the mountains. Often performed during weddings, harvests, and cultural festivals, it is a celebration of resilience and identity, with dancers adorned in colorful traditional attire that symbolizes their heritage. The Kabyle dance is more than a spectacle—it’s a living link to the past, embodying the spirit of a people who have preserved their customs against all odds."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section Sahraoui Dance -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_sahraoui_dance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/sahraoui_dance_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sahraoui Dance"
+                        android:textColor="#468C8A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:padding="8dp" />
+                    <VideoView
+                        android:id="@+id/video_sahraoui_dance"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <ImageButton
+                            android:id="@+id/play_sahraoui_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:backgroundTint="#4CAF50"
+                            android:src="@drawable/ic_play"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/pause_sahraoui_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#F44336"
+                            android:src="@drawable/ic_pause"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/stop_sahraoui_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#9E9E9E"
+                            android:src="@drawable/ic_stop"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/fullscreen_sahraoui_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#468C8A"
+                            android:src="@drawable/ic_fullscreen"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/sahraoui_dance_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The Sahraoui dance, performed by the nomadic communities of the Algerian Sahara, is a captivating display of elegance and endurance. Set to the hypnotic rhythms of desert music, it features flowing movements that mimic the shifting sands and the vastness of the landscape. Dancers, often draped in intricate robes, move in unison, their steps echoing the traditions of survival and unity in one of the world’s harshest environments. This dance is a profound expression of Sahraoui culture, performed during gatherings and celebrations, where it serves as both a tribute to the ancestors and a communal bond under the endless desert sky."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section Ouled Naïl Dance -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_ouled_nail_dance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/ouled_nail_dance_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ouled Naïl Dance"
+                        android:textColor="#468C8A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:padding="8dp" />
+                    <VideoView
+                        android:id="@+id/video_ouled_nail_dance"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="8dp">
+                        <ImageButton
+                            android:id="@+id/play_ouled_nail_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_play"
+                            android:backgroundTint="#4CAF50" />
+                        <ImageButton
+                            android:id="@+id/pause_ouled_nail_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_pause"
+                            android:backgroundTint="#F44336"
+                            android:layout_marginStart="16dp" />
+                        <ImageButton
+                            android:id="@+id/stop_ouled_nail_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_stop"
+                            android:backgroundTint="#9E9E9E"
+                            android:layout_marginStart="16dp" />
+                        <ImageButton
+                            android:id="@+id/fullscreen_ouled_nail_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_fullscreen"
+                            android:backgroundTint="#468C8A"
+                            android:layout_marginStart="16dp" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/ouled_nail_dance_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The Ouled Naïl dance is a traditional performance from the Ouled Naïl tribes of central Algeria, renowned for its elaborate costumes and intricate choreography. Accompanied by lively music featuring drums and flutes, this dance showcases a blend of elegance and strength, with dancers adorned in heavy jewelry and vibrant fabrics that shimmer with every move. Historically performed by women as a rite of passage and a display of artistry, it reflects a unique cultural legacy tied to the region’s pastoral roots. Today, the Ouled Naïl dance remains a cherished tradition, captivating audiences with its grace and the stories it tells of a proud and enduring people."
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Sidebar -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="#FFFFFF" />
+</androidx.drawerlayout.widget.DrawerLayout>

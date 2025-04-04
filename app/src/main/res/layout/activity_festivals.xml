@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#468C8A">
+
+        <!-- Toolbar (header) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:title="Statistics"
+            app:titleTextColor="#468C8A">
+
+            <!-- Bouton Login dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Login"
+                android:padding="8dp"
+                android:src="@drawable/ic_login"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!-- Bouton Exit dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/exit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Exit"
+                android:padding="8dp"
+                android:src="@drawable/ic_close"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Contenu avec ScrollView -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Titre principal -->
+                <ImageView
+                    android:id="@+id/lwla"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/wow"
+                    android:scaleType="centerInside"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Introduction -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Algeria, with its rich cultural heritage, ancient ruins, and vast Sahara Desert, is gradually becoming a destination for tourists seeking to explore its unique patrimony. Below are key statistics highlighting the influx of visitors to Algeria, particularly those interested in its historical and cultural treasures."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Statistique 1 : Nombre de touristes internationaux -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="International Tourist Arrivals"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <ImageView
+                    android:id="@+id/chart_international_arrivals"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/diag"
+                    android:contentDescription="Bar chart of international tourist arrivals"
+                    android:scaleType="centerInside"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="In 2023, Algeria welcomed 2.5 million international tourists, a significant increase from 1.9 million in 2019 before the pandemic. This growth reflects growing interest in Algeria’s UNESCO World Heritage Sites, such as the Casbah of Algiers and the Roman ruins of Timgad and Djemila."
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Statistique 2 : Origine des touristes -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Main Countries of Origin"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <ImageView
+                    android:id="@+id/chart_countries_origin"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/main"
+                    android:contentDescription="Pie chart of tourist origins"
+                    android:scaleType="centerInside"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Approximately 50% of international tourists come from Tunisia, followed by France (15%), Morocco (10%), and China (5%). Europeans and Africans are drawn to Algeria’s Mediterranean coast and historical landmarks, while the diaspora also plays a key role in tourism."
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Statistique 3 : Tourisme domestique -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Domestic Tourism"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <ImageView
+                    android:id="@+id/chart_domestic_tourism"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/talya"
+                    android:contentDescription="Line chart of domestic tourism"
+                    android:scaleType="centerInside"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Domestic tourism remains vital, with 3.7 million Algerians staying in hotels annually before 2020. This reflects local interest in exploring their own heritage, from the Kabylie region to the Saharan oases."
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Conclusion -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Conclusion: Algeria’s tourism sector is on the rise, driven by its unparalleled heritage. With government goals to reach 12 million visitors by 2030, investments in infrastructure and promotion are key to showcasing this hidden gem."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Sidebar (Navigation Drawer) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="#FFF5E6"
+        app:itemIconTint="#FFFFFF" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"> <!-- Durée de l'animation : 500ms -->
+
+    <!-- Translation : déplace l'élément de 100% de sa hauteur (en bas) vers sa position finale (0%) -->
+    <translate
+        android:fromYDelta="100%"
+        android:toYDelta="0%"
+        android:duration="@android:integer/config_mediumAnimTime" />
+
+    <!-- Optionnel : ajout d'une animation d'opacité pour un effet de fondu -->
+    <alpha
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:duration="@android:integer/config_mediumAnimTime" />
+
+</set>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardUseCompatPadding="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/slider_item_background"
+        android:clipToPadding="false"
+        android:clipChildren="false">
+
+        <!-- Conteneur pour l'image et l'overlay -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp">
+
+            <!-- Image principale -->
+            <ImageView
+                android:id="@+id/slider_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Slider Image"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Overlay pour un effet sombre -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#30000000"
+                android:clickable="false"
+                android:focusable="false" />
+        </FrameLayout>
+
+        <!-- Légende -->
+        <TextView
+            android:id="@+id/slider_caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#80000000"
+            android:padding="8dp"
+            android:text="Légende"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:clickable="false"
+            android:focusable="false"
+            tools:ignore="RtlCompat" />
+    </FrameLayout>
+
+</androidx.cardview.widget.CardView>

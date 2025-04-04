@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar (header) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:title="Algerian Traditions"
+            app:titleTextColor="#468C8A">
+
+            <!-- Bouton Login dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Login"
+                android:padding="8dp"
+                android:src="@drawable/ic_login"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!-- Bouton Exit dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/exit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Exit"
+                android:padding="8dp"
+                android:src="@drawable/ic_close"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Contenu principal avec ScrollView pour gérer le défilement -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#468C8A">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Titre : Algerian Weddings -->
+                <TextView
+                    android:id="@+id/algerian_weddings_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Algerian Weddings"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Slider d'images (Mariages) -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/traditions_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le slider (Mariages) -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/traditions_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Carte : Algerian Wedding Traditions -->
+                <LinearLayout
+                    android:id="@+id/wedding_traditions_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian Wedding Traditions"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur les traditions de mariage -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian weddings are vibrant celebrations steeped in tradition. The henna ceremony, a key ritual, involves intricate designs applied to the bride's hands and feet, symbolizing beauty and good fortune. The wedding procession, often accompanied by the lively sounds of the zorna (a traditional wind instrument), brings the community together in a joyous cortège. Finally, the feast features an array of traditional dishes such as couscous, mechoui (roasted lamb), and sweet pastries like baklava, reflecting the rich culinary heritage of Algeria."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Carte : Vidéo sur les traditions de mariage -->
+                <LinearLayout
+                    android:id="@+id/wedding_video_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre de la vidéo -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian Wedding Traditions Video"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Vidéo -->
+                    <VideoView
+                        android:id="@+id/wedding_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <!-- Séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Titre : Algerian Religious Festivals -->
+                <TextView
+                    android:id="@+id/religious_festivals_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Algerian Religious Festivals"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Slider d'images (Fêtes religieuses) -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/religious_festivals_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le slider (Fêtes religieuses) -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/religious_festivals_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Carte : Algerian Religious Festivals Traditions -->
+                <LinearLayout
+                    android:id="@+id/religious_festivals_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian Religious Festivals Traditions"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur les fêtes religieuses -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian religious festivals are deeply rooted in Islamic traditions, bringing communities together in celebration and reflection. Eid al-Fitr marks the end of Ramadan with joyous gatherings, where families share sweet treats like kaak and exchange warm greetings. Eid al-Adha, the Festival of Sacrifice, honors the willingness of Prophet Ibrahim to sacrifice his son, featuring the ritual of qurbani (animal sacrifice) and the sharing of meat with the less fortunate. Mawlid, the celebration of the Prophet Muhammad's birth, is observed with recitations of poetry, communal prayers, and festive meals, reflecting Algeria's rich spiritual heritage."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Carte : Aïd el-Fitr (Texte à gauche, Image à droite) -->
+                <LinearLayout
+                    android:id="@+id/eid_fitr_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eid al-Fitr in Algeria"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Conteneur horizontal pour le texte et l'image -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Texte à gauche -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Eid al-Fitr, known as the 'Festival of Breaking the Fast,' marks the end of Ramadan in Algeria with vibrant celebrations. Families gather early for prayers, dressed in their finest traditional clothing like the karakou or gandoura. The day is filled with joy as people exchange greetings of 'Eid Mubarak,' share sweet treats such as kaak and zlabia, and visit relatives to strengthen community bonds."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp"
+                            android:layout_marginEnd="8dp" />
+
+                        <!-- Image à droite -->
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="250dp"
+                            android:src="@drawable/fitre"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="Eid al-Fitr Celebration" />
+                    </LinearLayout>
+
+                    <!-- Image supplémentaire après le paragraphe -->
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/tay"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Additional Eid al-Fitr Image" />
+                </LinearLayout>
+
+                <!-- Carte : Aïd el-Adha (Texte à droite, Image à gauche) -->
+                <LinearLayout
+                    android:id="@+id/eid_adha_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eid al-Adha in Algeria"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Conteneur horizontal pour l'image et le texte -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image à gauche -->
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="250dp"
+                            android:src="@drawable/adha"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="Eid al-Adha Sacrifice"
+                            android:layout_marginEnd="8dp" />
+
+                        <!-- Texte à droite -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Eid al-Adha, the 'Festival of Sacrifice,' is a significant event in Algeria, commemorating Prophet Ibrahim's devotion. Families perform the qurbani ritual, sacrificing an animal like a sheep, and distribute the meat among relatives, neighbors, and the less fortunate. The day includes prayers, communal meals featuring dishes like mechoui, and acts of charity, reflecting values of generosity and solidarity."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image supplémentaire après le paragraphe -->
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/dbiha"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Additional Eid al-Adha Image" />
+                </LinearLayout>
+
+                <!-- Carte : Mawlid (Texte à gauche, Image à droite) -->
+                <LinearLayout
+                    android:id="@+id/mawlid_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mawlid in Algeria"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Conteneur horizontal pour le texte et l'image -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Texte à gauche -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Mawlid, the celebration of the Prophet Muhammad's birth, is a cherished occasion in Algeria. Communities gather for recitations of religious poetry, such as the Burda, and participate in communal prayers. Festive meals often include traditional dishes like rechta, and the streets come alive with decorations and processions, honoring the Prophet's legacy."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp"
+                            android:layout_marginEnd="8dp" />
+
+                        <!-- Image à droite -->
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="250dp"
+                            android:src="@drawable/moul"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="Mawlid Procession" />
+                    </LinearLayout>
+
+                    <!-- Image supplémentaire après le paragraphe -->
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/moulad"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Additional Mawlid Image" />
+                </LinearLayout>
+
+                <!-- Carte : Ramadan (Texte à droite, Image à gauche) -->
+                <LinearLayout
+                    android:id="@+id/ramadan_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ramadan in Algeria"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Conteneur horizontal pour l'image et le texte -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Image à gauche -->
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="300dp"
+                            android:src="@drawable/ramadan"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="Ramadan Iftar Gathering"
+                            android:layout_marginEnd="8dp" />
+
+                        <!-- Texte à droite -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Ramadan, the holy month of fasting, holds deep spiritual significance in Algeria. Muslims fast from dawn to dusk, breaking their fast at iftar with dates and traditional soups like chorba. The nights are filled with Taraweeh prayers, and families prepare special pastries like zlabia and qalb el louz, fostering a sense of devotion and togetherness."
+                            android:textColor="#666666"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </LinearLayout>
+
+                    <!-- Image supplémentaire après le paragraphe -->
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/zan"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Additional Ramadan Image" />
+                </LinearLayout>
+
+                <!-- Séparation avant le titre "Friday Couscous Tradition" -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Titre : Friday Couscous Tradition -->
+                <TextView
+                    android:id="@+id/friday_couscous_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Friday Couscous Tradition"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Séparation après le titre "Friday Couscous Tradition" -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Carte : Friday Couscous Tradition -->
+                <LinearLayout
+                    android:id="@+id/friday_couscous_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The Tradition of Couscous on Fridays"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur le couscous du vendredi -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="In Algeria, the tradition of eating couscous on Fridays holds a special place in the hearts of families. Friday, being the holy day of the week for Muslims, is a time for communal prayers and gatherings. After the Jumu'ah (Friday) prayer, families come together to share a hearty meal of couscous, often prepared with vegetables, chickpeas, and tender meat like lamb or chicken. This dish, served with a flavorful broth, symbolizes unity and gratitude, as it is often shared with neighbors and the less fortunate, reflecting the values of generosity and community deeply rooted in Algerian culture."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+
+                    <!-- Image de couscous après le paragraphe -->
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/couscous"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Couscous Image" />
+                </LinearLayout>
+
+                <!-- Séparation avant le titre "Yennayer Celebration" -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Titre : Yennayer Celebration -->
+                <TextView
+                    android:id="@+id/yennayer_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yennayer Celebration"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Séparation après le titre "Yennayer Celebration" -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Slider d'images (Yennayer) -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/yennayer_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le slider (Yennayer) -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/yennayer_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Carte : Yennayer Tradition -->
+                <LinearLayout
+                    android:id="@+id/yennayer_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The Tradition of Yennayer"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur Yennayer -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Yennayer marks the Amazigh (Berber) New Year, celebrated on January 12th or 13th in Algeria, and is a cherished cultural event that dates back thousands of years. This ancient tradition, rooted in the agricultural calendar, symbolizes renewal and prosperity. Families gather to share a festive meal, often featuring dishes like couscous with seven vegetables, chicken, or dried meat, believed to bring good fortune for the year ahead. The celebration is also marked by rituals such as lighting bonfires, singing traditional songs, and exchanging gifts, reflecting the deep connection of the Amazigh people to their heritage and the land."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Séparation avant le titre "New Tradition" -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Titre : New Tradition -->
+                <TextView
+                    android:id="@+id/new_tradition_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Tradition"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Séparation après le titre "New Tradition" -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Carte : New Tradition -->
+                <LinearLayout
+                    android:id="@+id/new_tradition_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The Tradition of [Nom]"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur la nouvelle tradition -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="This is a placeholder for the new tradition. You can describe the tradition here, including its cultural significance, rituals, and how it is celebrated in Algeria. For example, you might talk about a specific festival, a seasonal celebration, or a family tradition that holds deep meaning in Algerian culture."
+                        android:textColor="#666666"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Conteneur pour les 4 photos -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Première ligne (2 photos : gauche et droite) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <!-- Photo à gauche -->
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="150dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/baz"
+                                android:scaleType="centerCrop"
+                                android:contentDescription="New Tradition Photo 1"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Photo à droite -->
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="150dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/nnnnn"
+                                android:scaleType="centerCrop"
+                                android:contentDescription="New Tradition Photo 2"
+                                android:layout_marginStart="8dp" />
+                        </LinearLayout>
+
+                        <!-- Deuxième ligne (2 photos : gauche et droite) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="16dp">
+
+                            <!-- Photo à gauche -->
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="150dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/amazir"
+                                android:scaleType="centerCrop"
+                                android:contentDescription="New Tradition Photo 3"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Photo à droite -->
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="150dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/nayer"
+                                android:scaleType="centerCrop"
+                                android:contentDescription="New Tradition Photo 4"
+                                android:layout_marginStart="8dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Séparation finale (après toutes les cartes) -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginVertical="8dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Sidebar (Navigation Drawer) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="#FFFFFF" />
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar (header) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+            app:title="Patrimoine-DZ"
+            app:titleTextColor="#468C8A">
+
+            <!-- Bouton Login dans la Toolbar -->
+            <ImageButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Se connecter"
+                android:padding="8dp"
+                android:src="@drawable/ic_login"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Contenu déroulant -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFF5E6"
+                android:clipToPadding="false"
+                android:clipChildren="false">
+
+                <!-- Conteneur pour l'introduction (première carte) -->
+                <LinearLayout
+                    android:id="@+id/intro_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#468C8A"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="8dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre de l'introduction -->
+                    <TextView
+                        android:id="@+id/intro_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome to Algeria's Heritage"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Texte de l'introduction -->
+                    <TextView
+                        android:id="@+id/intro_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Explore Algeria's rich cultural legacy.\nFrom ancient ruins to vibrant traditions, discover a unique blend of history.\nDive into its music, cuisine, and architecture.\nA journey through time awaits you!"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Premier slider d'images -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/image_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le premier slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Conteneur pour le deuxième paragraphe (deuxième carte) -->
+                <LinearLayout
+                    android:id="@+id/distance_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#468C8A"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du deuxième paragraphe -->
+                    <TextView
+                        android:id="@+id/distance_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Geographical Diversity of Algeria"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur la distance d'Alger et les wilayas -->
+                    <TextView
+                        android:id="@+id/distance_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algiers, the capital of Algeria, is located in the central-northern part of the country, about 430 km from Constantine and 280 km from Oran. The country has 58 wilayas, each with its own unique traditions and landscapes. For instance, Tamanrasset in the south is over 1,900 km from Algiers, while Annaba in the east is around 600 km away. This geographical diversity reflects Algeria’s rich cultural heritage. Exploring the wilayas is a journey through an exceptional legacy!"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Image après le paragraphe -->
+                <ImageView
+                    android:id="@+id/algeria_image"
+                    android:layout_width="232dp"
+                    android:layout_height="203dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/map"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Image of Algeria" />
+
+                <!-- Conteneur pour le paragraphe sur les vêtements algériens -->
+                <LinearLayout
+                    android:id="@+id/clothing_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#468C8A"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe sur les vêtements -->
+                    <TextView
+                        android:id="@+id/clothing_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Traditional Algerian Clothing"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur les vêtements algériens -->
+                    <TextView
+                        android:id="@+id/clothing_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian clothing reflects a rich cultural heritage with diverse styles across regions.\nThe Karakou, a velvet jacket with gold embroidery, is iconic in Algiers.\nIn the Kabylie region, women wear colorful Berber dresses adorned with silver jewelry.\nThe southern Tuareg are known for their indigo-blue garments and turbans."
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Deuxième slider d'images (pour les vêtements) -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/clothing_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le deuxième slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/clothing_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Conteneur pour le paragraphe sur la cuisine algérienne -->
+                <LinearLayout
+                    android:id="@+id/cuisine_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#468C8A"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe sur la cuisine -->
+                    <TextView
+                        android:id="@+id/cuisine_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian Culinary Heritage"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur la cuisine algérienne -->
+                    <TextView
+                        android:id="@+id/cuisine_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian cuisine is a vibrant mix of Berber, Arab, and Mediterranean influences.\nCouscous, often served with vegetables and meat, is a national staple.\nDishes like Chakchouka, a spicy tomato and egg dish, are popular across regions.\nSweets such as Baklava and Makroud highlight the country’s love for desserts."
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Troisième slider d'images (pour la cuisine) -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/cuisine_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le troisième slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/cuisine_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Conteneur pour le paragraphe sur l'architecture algérienne -->
+                <LinearLayout
+                    android:id="@+id/architecture_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#468C8A"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe sur l'architecture -->
+                    <TextView
+                        android:id="@+id/architecture_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian Architectural Heritage"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur l'architecture algérienne -->
+                    <TextView
+                        android:id="@+id/architecture_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian architecture reflects a blend of Berber, Roman, and Islamic influences.\nThe Casbah of Algiers features narrow streets and Ottoman-style houses.\nAncient Roman ruins like Timgad and Djemila are UNESCO World Heritage sites.\nThe Great Mosque of Tlemcen showcases intricate Moorish design."
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Quatrième slider d'images (pour l'architecture) -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/architecture_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le quatrième slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/architecture_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Conteneur pour le paragraphe sur la musique algérienne -->
+                <LinearLayout
+                    android:id="@+id/music_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#468C8A"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre du paragraphe sur la musique -->
+                    <TextView
+                        android:id="@+id/music_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian Musical Heritage"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Paragraphe sur la musique algérienne -->
+                    <TextView
+                        android:id="@+id/music_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Algerian music is a vibrant part of its cultural heritage.\nGenres like Chaabi and Rai are deeply rooted in local traditions.\nAndalusian classical music reflects the country’s historical ties to Al-Andalus.\nInstruments like the oud and qanun create soulful melodies."
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Cinquième slider d'images (pour la musique) -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/music_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"
+                    android:paddingHorizontal="16dp" />
+
+                <!-- Indicateurs (dots) pour le cinquième slider -->
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/music_circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:ci_height="10dp"
+                    app:ci_width="10dp"
+                    app:ci_margin="6dp" />
+
+                <!-- Titre pour le drapeau algérien -->
+                <TextView
+                    android:id="@+id/flag_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The Algerian Flag"
+                    android:textColor="#C19A6B"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Image du drapeau algérien -->
+                <ImageView
+                    android:id="@+id/algerian_flag_image"
+                    android:layout_width="500dp"
+                    android:layout_height="464dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/algerian_flag"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Algerian Flag" />
+
+                <!-- Conteneur pour l'explication des éléments du drapeau -->
+                <LinearLayout
+                    android:id="@+id/flag_elements_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#468C8A"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Titre de l'explication -->
+                    <TextView
+                        android:id="@+id/flag_elements_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Elements of the Algerian Flag"
+                        android:textColor="#C19A6B"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Description des éléments du drapeau -->
+                    <TextView
+                        android:id="@+id/flag_elements_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The Algerian flag consists of two vertical stripes: green on the left and white on the right. The green represents Islam, the predominant religion, while the white symbolizes purity and peace. In the center, there is a red crescent and a five-pointed star. The red color signifies the blood of the martyrs who fought for independence, the crescent and star are traditional symbols of Islam, and the five points of the star represent the five pillars of Islam."
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <!-- Sidebar (Navigation Drawer) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationViewStyle"
+        app:itemBackground="@drawable/menu_item_background"
+    app:itemTextAppearance="@style/NavigationDrawerItemStyle"
+    app:headerLayout="@layout/nav_header"
+    app:menu="@menu/nav_menu"
+    app:itemTextColor="#FFFFFF"
+    app:itemIconTint="#FFFFFF" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

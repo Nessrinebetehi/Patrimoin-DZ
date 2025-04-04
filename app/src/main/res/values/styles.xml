@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Style pour le NavigationView -->
+    <style name="NavigationViewStyle">
+        <item name="android:background">#468C8A</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">start</item>
+    </style>
+
+    <style name="NavigationDrawerItemStyle" parent="Widget.MaterialComponents.NavigationView">
+        <item name="android:paddingTop">12dp</item> <!-- Espace au-dessus de chaque élément -->
+        <item name="android:paddingBottom">12dp</item> <!-- Espace en-dessous de chaque élément -->
+        <item name="android:paddingStart">16dp</item> <!-- Espace à gauche -->
+        <item name="android:paddingEnd">16dp</item> <!-- Espace à droite -->
+    </style>
+</resources>
