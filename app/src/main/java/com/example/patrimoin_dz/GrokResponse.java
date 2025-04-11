@@ -1,33 +1,47 @@
 package com.example.patrimoin_dz;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 public class GrokResponse {
-    @SerializedName("choices")
-    private Choice[] choices;
+    @SerializedName("candidates")
+    private List<Candidate> candidates;
 
     public String getResponseText() {
-        if (choices != null && choices.length > 0) {
-            return choices[0].getMessage().getContent();
+        if (candidates != null && !candidates.isEmpty()) {
+            Candidate candidate = candidates.get(0);
+            Content content = candidate.getContent();
+            if (content != null && content.getParts() != null && !content.getParts().isEmpty()) {
+                return content.getParts().get(0).getText();
+            }
         }
-        return "No response received.";
+        return "Aucune réponse générée.";
     }
 
-    public static class Choice {
-        @SerializedName("message")
-        private Message message;
-
-        public Message getMessage() {
-            return message;
-        }
-    }
-
-    public static class Message {
+    public static class Candidate {
         @SerializedName("content")
-        private String content;
+        private Content content;
 
-        public String getContent() {
+        public Content getContent() {
             return content;
+        }
+    }
+
+    public static class Content {
+        @SerializedName("parts")
+        private List<Part> parts;
+
+        public List<Part> getParts() {
+            return parts;
+        }
+    }
+
+    public static class Part {
+        @SerializedName("text")
+        private String text;
+
+        public String getText() {
+            return text;
         }
     }
 }

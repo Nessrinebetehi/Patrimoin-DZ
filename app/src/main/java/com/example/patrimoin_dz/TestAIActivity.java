@@ -16,7 +16,8 @@ public class TestAIActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_ai);
 
         GrokApiService apiService = RetrofitClient.getService();
-        GrokRequest request = new GrokRequest("What is the Casbah?");
+        GrokRequest request = new GrokRequest();
+        request.setPrompt("Test de l'API Gemini : Parlez-moi de la Casbah d'Alger.");
         Call<GrokResponse> call = apiService.getChatCompletion(request);
 
         call.enqueue(new Callback<GrokResponse>() {

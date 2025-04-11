@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@drawable/history_item_background">
+
+    <!-- Titre de la conversation -->
+    <TextView
+        android:id="@+id/history_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Titre de la conversation"
+        android:textColor="#1A1A1A"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/history_date" />
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/history_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01/01/2023 12:00"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/history_title" />
+
+    <!-- Aperçu de la conversation -->
+    <TextView
+        android:id="@+id/history_preview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Aperçu de la conversation..."
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

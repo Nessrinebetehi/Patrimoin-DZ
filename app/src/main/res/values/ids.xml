@@ -28,4 +28,22 @@
     <item name="video_sahraoui_dance" type="id" />
     <item name="video_kabyle_dance" type="id" />
     <item name="video_ouled_nail_dance" type="id" />
+    <item name="storyImage" type="id" />
+    <item name="storyUserName" type="id" />
+    <item name="notifications_recycler_view" type="id" />
+    <item name="comment_input" type="id" />
+    <item name="send_comment_button" type="id" />
+    <item name="friends_recycler_view" type="id" />
+    <item name="post_image" type="id" />
+    <item name="chat_recycler_view" type="id" />
+    <item name="input_layout" type="id" />
+    <item name="nav_history" type="id" />
+    <item name="nav_culture" type="id" />
+    <item name="nav_logout" type="id" />
+    <item name="responseText" type="id" />
+    <item name="loadingIndicator" type="id" />
+    <item name="askButton" type="id" />
+    <item name="userInput" type="id" />
+    <item name="ai_icon" type="id" />
+    <item name="user_icon" type="id" />
 </resources>

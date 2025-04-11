@@ -18,5 +18,9 @@
         <item name="android:paddingBottom">12dp</item> <!-- Espace en-dessous de chaque élément -->
         <item name="android:paddingStart">16dp</item> <!-- Espace à gauche -->
         <item name="android:paddingEnd">16dp</item> <!-- Espace à droite -->
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 </resources>

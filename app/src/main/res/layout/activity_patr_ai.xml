@@ -1,126 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".PatrAIActivity">
 
-    <!-- Contenu principal -->
-    <LinearLayout
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#FFF5E6">
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        app:title="PatrAI"
+        app:titleTextColor="#1A1A1A"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
-            app:title="PatrAI"
-            app:titleTextColor="#468C8A">
+        <ImageButton
+            android:id="@+id/new_page_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="New Page"
+            android:padding="12dp"
+            android:src="@drawable/ic_new_page"
+            android:visibility="visible"
+            app:tint="#468C8A"
+            tools:ignore="TouchTargetSizeCheck" />
 
-            <ImageButton
-                android:id="@+id/login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Login"
-                android:padding="8dp"
-                android:src="@drawable/ic_login"
-                android:visibility="visible"
-                tools:ignore="TouchTargetSizeCheck" />
+        <ImageButton
+            android:id="@+id/history_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="History"
+            android:padding="12dp"
+            android:src="@drawable/ic_history"
+            android:visibility="visible"
+            app:tint="#468C8A"
+            tools:ignore="TouchTargetSizeCheck" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
-            <ImageButton
-                android:id="@+id/exit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Exit"
-                android:padding="8dp"
-                android:src="@drawable/ic_close"
-                android:visibility="visible"
-                tools:ignore="TouchTargetSizeCheck" />
-        </androidx.appcompat.widget.Toolbar>
+    <!-- Zone de chat -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:listitem="@layout/item_chat_message" />
 
-        <!-- Contenu avec ScrollView -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <!-- Indicateur de chargement -->
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/input_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-            <LinearLayout
+    <!-- Zone de saisie en bas -->
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Posez votre question..."
+            app:boxBackgroundMode="none"
+            app:hintTextColor="#999999"
+            app:endIconMode="clear_text"
+            app:endIconTint="#468C8A">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/question_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center_horizontal">
+                android:textColor="#1A1A1A"
+                android:textColorHint="#999999"
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:fontFamily="sans-serif" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ask me anything about Algerian heritage!"
-                    android:textColor="#666666"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="24dp" />
-
-                <EditText
-                    android:id="@+id/question_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Type your question here..."
-                    android:textColor="#666666"
-                    android:textColorHint="#999999"
-                    android:backgroundTint="#468C8A"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp" />
-
-                <Button
-                    android:id="@+id/submit_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ask PatrAI"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#468C8A"
-                    android:padding="8dp"
-                    android:layout_marginBottom="16dp" />
-
-                <ProgressBar
-                    android:id="@+id/loading_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginBottom="16dp" />
-
-                <TextView
-                    android:id="@+id/response_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Your answer will appear here."
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp" />
-            </LinearLayout>
-        </ScrollView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#468C8A"
+            app:icon="@drawable/ic_send"
+            app:iconTint="#FFFFFF"
+            app:cornerRadius="24dp"
+            app:strokeWidth="0dp"
+            android:contentDescription="Send" />
     </LinearLayout>
 
-    <!-- Sidebar (Navigation Drawer) -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:theme="@style/NavigationViewStyle"
-        app:itemBackground="@drawable/menu_item_background"
-        app:itemTextAppearance="@style/NavigationDrawerItemStyle"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu"
-        app:itemTextColor="#FFF5E6"
-        app:itemIconTint="#FFFFFF" />
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

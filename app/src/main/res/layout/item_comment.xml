@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Main Comment Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- User Profile Image -->
+        <ImageView
+            android:id="@+id/comment_user_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_profile_placeholder"
+            android:scaleType="centerCrop" />
+
+        <!-- Comment Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <!-- User Name -->
+            <TextView
+                android:id="@+id/comment_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#1C2526" />
+
+            <!-- Comment Text -->
+            <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is a comment."
+                android:textSize="14sp"
+                android:textColor="#606770" />
+
+            <!-- Comment Time -->
+            <TextView
+                android:id="@+id/comment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Il y a 5 minutes"
+                android:textSize="12sp"
+                android:textColor="#A0A0A0"
+                android:layout_marginTop="2dp" />
+
+            <!-- Interaction Buttons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+
+                <!-- Reply Button -->
+                <Button
+                    android:id="@+id/reply_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="Répondre"
+                    android:textColor="#468C8A"
+                    android:textSize="12sp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp" />
+
+                <!-- React Button -->
+                <Button
+                    android:id="@+id/react_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="Réagir"
+                    android:textColor="#468C8A"
+                    android:textSize="12sp"
+                    android:drawableStart="@drawable/ic_like"
+                    android:drawablePadding="4dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Reaction Bar (Hidden by default) -->
+    <LinearLayout
+        android:id="@+id/comment_reaction_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:orientation="horizontal"
+        android:background="@drawable/reaction_bar_background"
+        android:padding="6dp"
+        android:layout_gravity="center_horizontal"
+        android:elevation="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/comment_reaction_like"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="👍"
+            android:textSize="20sp"
+            android:contentDescription="Like" />
+
+        <TextView
+            android:id="@+id/comment_reaction_love"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="❤️"
+            android:textSize="20sp"
+            android:contentDescription="Love" />
+
+        <TextView
+            android:id="@+id/comment_reaction_haha"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="😂"
+            android:textSize="20sp"
+            android:contentDescription="Haha" />
+
+        <TextView
+            android:id="@+id/comment_reaction_wow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="😮"
+            android:textSize="20sp"
+            android:contentDescription="Wow" />
+
+        <TextView
+            android:id="@+id/comment_reaction_sad"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="😢"
+            android:textSize="20sp"
+            android:contentDescription="Sad" />
+
+        <TextView
+            android:id="@+id/comment_reaction_angry"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="😡"
+            android:textSize="20sp"
+            android:contentDescription="Angry" />
+    </LinearLayout>
+
+    <!-- Nested RecyclerView for Replies -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/replies_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:visibility="gone"
+        android:nestedScrollingEnabled="false" />
+
+</LinearLayout>

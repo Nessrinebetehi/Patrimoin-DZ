@@ -55,6 +55,40 @@ dependencies {
     implementation(libs.firebase.database)
     implementation ("com.google.firebase:firebase-auth:21.0.0")
 
+    implementation ("com.github.bumptech.glide:glide:4.12.0") // For image loading
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+
+    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.firebase.firestore)
+
+    implementation ("androidx.room:room-runtime:2.6.1")
+    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+
+    implementation ("androidx.emoji2:emoji2:1.4.0")
+    implementation ("androidx.emoji2:emoji2-bundled:1.4.0")
+
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("androidx.core:core-ktx:1.12.0")
+
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0") // Ajout de cette ligne
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3") // Nécessaire pour OkHttpClient
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3") // Nécessaire pour HttpLoggingInterceptor
+    implementation ("org.json:json:20231013")// Nécessaire pour
+
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation (platform("com.google.firebase:firebase-bom:33.12.0"))
+
+
+    implementation ("com.google.firebase:firebase-firestore:24.10.3")
+    implementation ("com.google.firebase:firebase-storage:20.3.0") // Pour les images
+    implementation ("com.google.android.gms:play-services-base:18.5.0")
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

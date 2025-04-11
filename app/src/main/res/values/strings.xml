@@ -2,5 +2,11 @@
     <string name="app_name">Patrimoine-DZ</string>
     <string name="navigation_drawer_open">Ouvrir le menu</string>
     <string name="navigation_drawer_close">Fermer le menu</string>
+    <string name="profile" />
+    <string name="posts" />
+    <string name="followers" />
+    <string name="following" />
+    <string name="edit_profile" />
+    <string name="share_profile" />
 
 </resources>

@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // Ensure this matches your layout file
+        setContentView(R.layout.activity_login);
 
         // Initialiser Firebase Auth
         try {
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             Log.d(TAG, "Utilisateur déjà connecté : " + currentUser.getEmail());
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
             finish();
             return;
         }
@@ -101,7 +101,9 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.d(TAG, "Connexion réussie pour l'utilisateur : " + (user != null ? user.getEmail() : "null"));
                             Toast.makeText(LoginActivity.this, "Connexion réussie !", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            // Navigate to ProfileActivity
+                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear the activity stack
                             startActivity(intent);
                             finish();
                         } else {
