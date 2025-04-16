@@ -4,44 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
-    android:background="#FFFFFF"
+    android:padding="10dp"
     android:gravity="center_vertical">
 
-    <!-- Notification Icon -->
     <ImageView
         android:id="@+id/notification_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_notification"
-        android:scaleType="centerInside" />
+        android:contentDescription="Notification Icon"
+        android:src="@drawable/ic_notification" />
 
-    <!-- Notification Details -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginStart="16dp">
+        android:layout_marginStart="8dp">
 
-        <!-- Notification Message -->
         <TextView
             android:id="@+id/notification_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Someone liked your post!"
             android:textSize="16sp"
-            android:textColor="#1C2526" />
+            android:textColor="#000000" />
 
-        <!-- Notification Time -->
         <TextView
             android:id="@+id/notification_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2 hours ago"
             android:textSize="12sp"
-            android:textColor="#606770"
-            android:layout_marginTop="4dp" />
+            android:textColor="#666666" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/accept_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#468C8A"
+        android:text="Accepter"
+        android:textColor="#FFFF"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/reject_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refuser"
+        android:backgroundTint="#468C8A"
+        android:textColor="#FFFF"
+        android:textSize="12sp" />
 </LinearLayout>

@@ -3,40 +3,60 @@ package com.example.patrimoin_dz;
 import android.net.Uri;
 
 public class Message {
-    private String text;
-    private boolean isSentByUser;
-    private Uri imageUri; // Pour stocker l'URI de l'image
-    private boolean isImage; // Indique si le message est une image
+    private String id;
+    private String content;
+    private String senderId;
+    private long timestamp;
+    private boolean isImage;
 
-    // Constructeur pour un message texte
-    public Message(String text, boolean isSentByUser) {
-        this.text = text;
-        this.isSentByUser = isSentByUser;
-        this.isImage = false;
-        this.imageUri = null;
+    // Constructeur sans argument requis par Firestore
+    public Message(Uri uri, boolean b) {
     }
 
-    // Constructeur pour un message avec image
-    public Message(Uri imageUri, boolean isSentByUser) {
-        this.text = "";
-        this.isSentByUser = isSentByUser;
-        this.imageUri = imageUri;
-        this.isImage = true;
+    public Message(String content, boolean isImage) {
+        this.content = content;
+        this.senderId = senderId;
+        this.timestamp = timestamp;
+        this.isImage = isImage;
     }
 
-    public String getText() {
-        return text;
+    public String getId() {
+        return id;
     }
 
-    public boolean isSentByUser() {
-        return isSentByUser;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Uri getImageUri() {
-        return imageUri;
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public boolean isImage() {
         return isImage;
+    }
+
+    public void setImage(boolean isImage) {
+        this.isImage = isImage;
     }
 }

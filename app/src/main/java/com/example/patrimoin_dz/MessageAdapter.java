@@ -3,19 +3,20 @@ package com.example.patrimoin_dz;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
     private List<Message> messageList;
+    private FirebaseAuth mAuth;
 
     public MessageAdapter(List<Message> messageList) {
         this.messageList = messageList;
+        this.mAuth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -28,53 +29,31 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         Message message = messageList.get(position);
+        String currentUserId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : "";
 
-        // Réinitialiser les visibilités
-        holder.sentMessage.setVisibility(View.GONE);
-        holder.receivedMessage.setVisibility(View.GONE);
-        holder.sentImage.setVisibility(View.GONE);
-        holder.receivedImage.setVisibility(View.GONE);
-
-        if (message.isImage()) {
-            // Afficher une image
-            if (message.isSentByUser()) {
-                Glide.with(holder.itemView.getContext())
-                        .load(message.getImageUri())
-                        .into(holder.sentImage);
-                holder.sentImage.setVisibility(View.VISIBLE);
-            } else {
-                Glide.with(holder.itemView.getContext())
-                        .load(message.getImageUri())
-                        .into(holder.receivedImage);
-                holder.receivedImage.setVisibility(View.VISIBLE);
-            }
+        if (message.getSenderId().equals(currentUserId)) {
+            holder.userMessage.setText(message.getContent());
+            holder.userMessage.setVisibility(View.VISIBLE);
+            holder.aiMessage.setVisibility(View.GONE);
         } else {
-            // Afficher un message texte
-            if (message.isSentByUser()) {
-                holder.sentMessage.setText(message.getText());
-                holder.sentMessage.setVisibility(View.VISIBLE);
-            } else {
-                holder.receivedMessage.setText(message.getText());
-                holder.receivedMessage.setVisibility(View.VISIBLE);
-            }
+            holder.aiMessage.setText(message.getContent());
+            holder.aiMessage.setVisibility(View.VISIBLE);
+            holder.userMessage.setVisibility(View.GONE);
         }
     }
 
     @Override
     public int getItemCount() {
-        return messageList.size();
+        return messageList != null ? messageList.size() : 0;
     }
 
     static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView sentMessage, receivedMessage;
-        ImageView sentImage, receivedImage;
+        TextView userMessage, aiMessage;
 
-        public MessageViewHolder(@NonNull View itemView) {
+        MessageViewHolder(@NonNull View itemView) {
             super(itemView);
-            sentMessage = itemView.findViewById(R.id.sentMessage);
-            receivedMessage = itemView.findViewById(R.id.receivedMessage);
-            sentImage = itemView.findViewById(R.id.sentImage);
-            receivedImage = itemView.findViewById(R.id.receivedImage);
+            userMessage = itemView.findViewById(R.id.user_message);
+            aiMessage = itemView.findViewById(R.id.ai_message);
         }
     }
 }

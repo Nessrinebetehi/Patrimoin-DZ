@@ -1,6 +1,7 @@
 package com.example.patrimoin_dz;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +40,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             holder.unreadCount.setVisibility(View.GONE);
         }
 
-        if (!chat.getTimestamp().isEmpty()) {
-            holder.timestamp.setText(chat.getTimestamp());
-            holder.timestamp.setVisibility(View.VISIBLE);
-        } else {
-            holder.timestamp.setVisibility(View.GONE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            if (!chat.getTimestamp().isEmpty()) {
+                holder.timestamp.setText(chat.getTimestamp());
+                holder.timestamp.setVisibility(View.VISIBLE);
+            } else {
+                holder.timestamp.setVisibility(View.GONE);
+            }
         }
 
-        // Gérer le clic sur une conversation
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), ChatConversationActivity.class);
             intent.putExtra("USER_NAME", chat.getUserName());

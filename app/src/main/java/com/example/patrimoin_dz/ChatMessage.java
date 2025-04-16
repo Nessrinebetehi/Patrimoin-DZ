@@ -17,3 +17,4 @@ public class ChatMessage {
         return isUser;
     }
 }
+

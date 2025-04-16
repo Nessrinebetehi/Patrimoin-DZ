@@ -46,4 +46,29 @@
     <item name="userInput" type="id" />
     <item name="ai_icon" type="id" />
     <item name="user_icon" type="id" />
+    <item name="account_username" type="id" />
+    <item name="account_display_name" type="id" />
+    <item name="first_name" type="id" />
+    <item name="confirm_password" type="id" />
+    <item name="progress_bar" type="id" />
+    <item name="content_edit_text" type="id" />
+    <item name="post_image_view" type="id" />
+    <item name="story_username" type="id" />
+    <item name="select_image_button" type="id" />
+    <item name="publish_button" type="id" />
+    <item name="cancel_button" type="id" />
+    <item name="root_layout" type="id" />
+    <item name="music_toggle" type="id" />
+    <item name="story_progress" type="id" />
+    <item name="comment_content" type="id" />
+    <item name="comment_timestamp" type="id" />
+    <item name="comment_reply" type="id" />
+    <item name="post_number" type="id" />
+    <item name="accept_button" type="id" />
+    <item name="reject_button" type="id" />
+    <item name="addFriendButton" type="id" />
+    <item name="usernameTextView" type="id" />
+    <item name="username_text_view" type="id" />
+    <item name="notifications_button" type="id" />
+    <item name="chats_recycler_view" type="id" />
 </resources>

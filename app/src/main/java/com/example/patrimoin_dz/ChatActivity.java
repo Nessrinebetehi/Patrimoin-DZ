@@ -1,78 +1,56 @@
 package com.example.patrimoin_dz;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
+    private static final String TAG = "ChatActivity";
     private RecyclerView recyclerViewChats;
-    private RecyclerView storiesRecyclerView;
     private SearchView searchView;
     private ChatAdapter chatAdapter;
-    private StoriesAdapter storiesAdapter;
     private List<Chat> chatList;
-    private List<ChatStory> storiesList;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private ListenerRegistration chatsListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        // Initialize Toolbar
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // Initialize RecyclerViews and SearchView
         recyclerViewChats = findViewById(R.id.recyclerViewChats);
-        storiesRecyclerView = findViewById(R.id.storiesRecyclerView);
         searchView = findViewById(R.id.searchView);
 
-        // Setup Stories RecyclerView
-        setupStoriesRecyclerView();
-
-        // Setup Chats RecyclerView
-        setupChatsRecyclerView();
-
-        // Configure SearchView
-        setupSearchView();
-    }
-
-    private void setupStoriesRecyclerView() {
-        storiesList = new ArrayList<>();
-        // Ajoutez des données de stories si elles existent
-        // Exemple : storiesList.add(new ChatStory("User1", R.drawable.profile1));
-        storiesAdapter = new StoriesAdapter(storiesList);
-        storiesRecyclerView.setAdapter(storiesAdapter);
-        storiesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        // Si aucune story n'existe, vous pouvez masquer le RecyclerView
-        if (storiesList.isEmpty()) {
-            storiesRecyclerView.setVisibility(RecyclerView.GONE);
-        }
-    }
-
-    private void setupChatsRecyclerView() {
         chatList = new ArrayList<>();
-        // Ajoutez des données de conversations (exemple)
-        chatList.add(new Chat("Blondinelle", "Qu'y a-t-il sur votre playlist ?", 4, "4j", R.drawable.ic_profile_placeholder));
-        chatList.add(new Chat("cutty girls", "Blondinelle - ph...", 0, "serr", R.drawable.ic_profile_placeholder));
-        chatList.add(new Chat("chaimae", "+ de 4 nouveaux ...", 4, "3 sem", R.drawable.ic_profile_placeholder));
-        chatList.add(new Chat("zahra", "+ de 4 nouveaux ...", 4, "3 sem", R.drawable.ic_profile_placeholder));
-        chatList.add(new Chat("عزيزة عين", "+ de 4 nouveaux ...", 4, "4 sem", R.drawable.ic_profile_placeholder));
-        chatList.add(new Chat("Bouchra Nh", "", 0, "", R.drawable.ic_profile_placeholder));
-
         chatAdapter = new ChatAdapter(chatList);
         recyclerViewChats.setAdapter(chatAdapter);
         recyclerViewChats.setLayoutManager(new LinearLayoutManager(this));
+
+        setupSearchView();
+        loadChats();
     }
 
     private void setupSearchView() {
@@ -94,17 +72,95 @@ public class ChatActivity extends AppCompatActivity {
     private void filterChats(String query) {
         List<Chat> filteredList = new ArrayList<>();
         for (Chat chat : chatList) {
-            if (chat.getUserName().toLowerCase().contains(query.toLowerCase()) ||
-                    chat.getLastMessage().toLowerCase().contains(query.toLowerCase())) {
+            if (chat.getUserName().toLowerCase().contains(query.toLowerCase())) {
                 filteredList.add(chat);
             }
         }
         chatAdapter.updateList(filteredList);
     }
 
+    private void loadChats() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Log.e(TAG, "Utilisateur non connecté");
+            finish();
+            return;
+        }
+        String userId = currentUser.getUid();
+
+        chatsListener = db.collection("friendships")
+                .document(userId)
+                .collection("friends")
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        Log.e(TAG, "Erreur chargement amis: " + error.getMessage(), error);
+                        return;
+                    }
+                    chatList.clear();
+                    if (value != null && !value.isEmpty()) {
+                        for (QueryDocumentSnapshot doc : value) {
+                            String friendId = doc.getString("friendId");
+                            String username = doc.getString("username");
+                            if (friendId != null && username != null) {
+                                // Vérifier si une conversation existe
+                                String conversationId = generateConversationId(userId, friendId);
+                                db.collection("conversations").document(conversationId)
+                                        .get()
+                                        .addOnSuccessListener(conversationDoc -> {
+                                            String lastMessage = "";
+                                            String timestamp = "";
+                                            if (conversationDoc.exists()) {
+                                                lastMessage = conversationDoc.getString("lastMessage") != null ?
+                                                        conversationDoc.getString("lastMessage") : "";
+                                                Long conversationTimestamp = conversationDoc.getLong("timestamp");
+                                                timestamp = conversationTimestamp != null ?
+                                                        formatTimestamp(conversationTimestamp) : "";
+                                            }
+                                            Chat chat = new Chat(
+                                                    username,
+                                                    lastMessage,
+                                                    0, // Unread count TBD
+                                                    timestamp,
+                                                    R.drawable.ic_profile_placeholder
+                                            );
+                                            chatList.add(chat);
+                                            chatAdapter.notifyDataSetChanged();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.e(TAG, "Erreur récupération conversation: " + e.getMessage(), e);
+                                        });
+                            }
+                        }
+                        Log.d(TAG, "Amis chargés : " + chatList.size());
+                    }
+                    chatAdapter.notifyDataSetChanged();
+                });
+    }
+
+    private String generateConversationId(String user1Id, String user2Id) {
+        return user1Id.compareTo(user2Id) < 0 ? user1Id + "_" + user2Id : user2Id + "_" + user1Id;
+    }
+
+    private String formatTimestamp(long timestamp) {
+        long now = System.currentTimeMillis();
+        long diff = now - timestamp;
+        if (diff < 60_000) return "Il y a quelques secondes";
+        if (diff < 3_600_000) return "Il y a " + (diff / 60_000) + " min";
+        if (diff < 86_400_000) return "Il y a " + (diff / 3_600_000) + " h";
+        return "Il y a " + (diff / 86_400_000) + " j";
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (chatsListener != null) {
+            chatsListener.remove();
+        }
     }
 }

@@ -53,14 +53,14 @@
             android:layout_gravity="center"
             android:layout_marginBottom="32dp" />
 
-        <!-- Champ Prénom -->
+        <!-- Champ Nom d'affichage -->
         <EditText
-            android:id="@+id/first_name"
+            android:id="@+id/display_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/edittext_background"
-            android:hint="First Name"
+            android:hint="Display Name"
             android:padding="12dp"
             android:textColor="#666666"
             android:textColorHint="#999999"
@@ -140,7 +140,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- ProgressBar ajoutée -->
+    <!-- ProgressBar -->
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"

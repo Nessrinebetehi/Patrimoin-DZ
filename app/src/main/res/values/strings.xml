@@ -8,5 +8,12 @@
     <string name="following" />
     <string name="edit_profile" />
     <string name="share_profile" />
+    <string name="profile_picture">Profile Picture</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="username">Username</string>
+    <string name="display_name">Display Name</string>
+    <string name="save">Save</string>
+    <string name="switch_account">Switch Account</string>
+    <string name="create_new_account">Créer un nouveau compte</string>
 
 </resources>

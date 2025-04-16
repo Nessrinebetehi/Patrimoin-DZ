@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+
+
+    <!-- New Post Button -->
+    <Button
+        android:id="@+id/new_post_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Post"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#468C8A" />
+</LinearLayout>

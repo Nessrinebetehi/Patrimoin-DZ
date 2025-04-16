@@ -27,11 +27,15 @@ public class Chat {
         return unreadCount;
     }
 
-    public String getTimestamp() {
+    public CharSequence getTimestamp() {
         return timestamp;
     }
 
     public int getProfileImage() {
         return profileImage;
+    }
+
+    public Object getConversationId() {
+        return null;
     }
 }

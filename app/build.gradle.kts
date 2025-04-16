@@ -55,7 +55,10 @@ dependencies {
     implementation(libs.firebase.database)
     implementation ("com.google.firebase:firebase-auth:21.0.0")
 
-    implementation ("com.github.bumptech.glide:glide:4.12.0") // For image loading
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation(libs.camera.view)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.firebase.crashlytics.buildtools) // For image loading
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
 
@@ -88,6 +91,19 @@ dependencies {
     implementation ("com.google.firebase:firebase-storage:20.3.0") // Pour les images
     implementation ("com.google.android.gms:play-services-base:18.5.0")
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+
+
+
+
+    implementation ("com.google.android.gms:play-services-base:18.5.0")
+    implementation ("androidx.activity:activity:1.8.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    implementation ("com.google.android.gms:play-services-base:18.5.0")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

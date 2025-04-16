@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,15 +28,14 @@ public class CreatePostActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private Uri imageUri;
 
-    private final ActivityResultLauncher<String> pickImageLauncher = registerForActivityResult(
-            new ActivityResultContracts.GetContent(),
-            uri -> {
-                if (uri != null) {
-                    imageUri = uri;
-                    postImageView.setImageURI(uri);
+    private final ActivityResultLauncher<Intent> pickImageLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    imageUri = result.getData().getData();
+                    postImageView.setImageURI(imageUri);
                 }
-            }
-    );
+            });
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -57,7 +57,10 @@ public class CreatePostActivity extends AppCompatActivity {
         postImageView = findViewById(R.id.post_image_view);
         postButton = findViewById(R.id.post_button);
 
-        postImageView.setOnClickListener(v -> pickImageLauncher.launch("image/*"));
+        postImageView.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pickImageLauncher.launch(intent);
+        });
 
         postButton.setOnClickListener(v -> createPost());
     }
@@ -71,12 +74,15 @@ public class CreatePostActivity extends AppCompatActivity {
             return;
         }
 
+        String postId = db.collection("posts").document().getId();
+        long timestamp = System.currentTimeMillis();
+
         if (imageUri != null) {
-            StorageReference ref = storage.getReference().child("posts/" + System.currentTimeMillis());
+            StorageReference ref = storage.getReference().child("posts/" + postId);
             ref.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
-                        Post post = new Post(userId, uri.toString(), System.currentTimeMillis(), content);
-                        db.collection("posts").add(post)
+                        Post post = new Post(postId, userId, postId, userId, uri.toString(), content, timestamp);
+                        db.collection("posts").document(postId).set(post)
                                 .addOnSuccessListener(doc -> {
                                     updatePostsCount(userId);
                                     Toast.makeText(this, "Publication créée", Toast.LENGTH_SHORT).show();
@@ -86,8 +92,8 @@ public class CreatePostActivity extends AppCompatActivity {
                     }))
                     .addOnFailureListener(e -> Toast.makeText(this, "Erreur d'upload : " + e.getMessage(), Toast.LENGTH_SHORT).show());
         } else {
-            Post post = new Post(userId, "", System.currentTimeMillis(), content);
-            db.collection("posts").add(post)
+            Post post = new Post(postId, userId, postId, userId, "", content, timestamp);
+            db.collection("posts").document(postId).set(post)
                     .addOnSuccessListener(doc -> {
                         updatePostsCount(userId);
                         Toast.makeText(this, "Publication créée", Toast.LENGTH_SHORT).show();

@@ -40,6 +40,13 @@ public class PostImageAdapter extends RecyclerView.Adapter<PostImageAdapter.Imag
         return imageUrls != null ? imageUrls.size() : 0;
     }
 
+    public void addImage(String string) {
+    }
+
+    public CharSequence getImageUrls() {
+        return null;
+    }
+
     static class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 

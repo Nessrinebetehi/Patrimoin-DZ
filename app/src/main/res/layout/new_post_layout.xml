@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Post Image -->
+    <ImageView
+        android:id="@+id/post_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile_placeholder"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="Post image" />
+
+    <!-- Text Input -->
+    <EditText
+        android:id="@+id/post_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write something..."
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        android:minHeight="100dp"
+        android:gravity="top|start" />
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <!-- Choose Photo Button -->
+        <Button
+            android:id="@+id/choose_photo_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Choose Photo"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#468C8A"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Share Post Button -->
+        <Button
+            android:id="@+id/share_post_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Share Post"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#468C8A"
+            android:enabled="false" /> <!-- Désactivé par défaut -->
+    </LinearLayout>
+</LinearLayout>
