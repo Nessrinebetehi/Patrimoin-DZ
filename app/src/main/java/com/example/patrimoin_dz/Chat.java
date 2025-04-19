@@ -5,14 +5,14 @@ public class Chat {
     private String lastMessage;
     private int unreadCount;
     private String timestamp;
-    private int profileImage;
+    private String profileImageUrl;
 
-    public Chat(String userName, String lastMessage, int unreadCount, String timestamp, int profileImage) {
+    public Chat(String userName, String lastMessage, int unreadCount, String timestamp, String profileImageUrl) {
         this.userName = userName;
         this.lastMessage = lastMessage;
         this.unreadCount = unreadCount;
         this.timestamp = timestamp;
-        this.profileImage = profileImage;
+        this.profileImageUrl = profileImageUrl;
     }
 
     public String getUserName() {
@@ -27,15 +27,15 @@ public class Chat {
         return unreadCount;
     }
 
-    public CharSequence getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public int getProfileImage() {
-        return profileImage;
+    public String getProfileImageUrl() {
+        return profileImageUrl;
     }
 
-    public Object getConversationId() {
-        return null;
+    public String getConversationId() {
+        return null; // À ajuster si tu veux passer un conversationId spécifique
     }
 }

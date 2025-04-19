@@ -1,87 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFF5E6"
+    android:background="@drawable/ff"
     android:padding="16dp"
     android:gravity="center">
 
     <!-- Conteneur horizontal pour l'image de login et le titre -->
-
-    <!-- Image principale -->
     <LinearLayout
-        android:layout_width="393dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="190dp"
+        android:layout_marginRight="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <!-- Image de login (à gauche) -->
-
-        <!-- Premier TextView (à droite de l'image) -->
         <ImageView
             android:id="@+id/login_image"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="16dp"
-            android:contentDescription="Login"
+            android:contentDescription="Logo Patrimoine-DZ"
             android:src="@drawable/lognii" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Patrimoine-DZ"
             android:textColor="#468C8A"
-            android:textSize="32dp"
+            android:textSize="28sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imagePatrimoine"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image" />
-
-    <!-- Titre -->
-    <TextView
-        android:id="@+id/titre"
-        android:layout_width="478dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="DISCOVER ALGERIAN HERITAGE"
-        android:textColor="#1A2526"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <!-- Description -->
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
+    <!-- Titre dans une CardView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="401dp"
         android:layout_height="wrap_content"
-        android:text="Access the list of historical and cultural sites in Algeria, classified and to be discovered near you"
-        android:textSize="16sp"
-        android:textColor="#666666"
+        android:layout_marginHorizontal="16dp"
+        app:cardBackgroundColor="#80D3D3D3"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <TextView
+            android:id="@+id/titre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="DISCOVER ALGERIAN HERITAGE"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Description dans une CardView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:layout_marginHorizontal="16dp" />
+        app:cardBackgroundColor="#80D3D3D3"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="Access the list of historical and cultural sites in Algeria, classified and to be discovered near you"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
 
     <!-- Bouton Continuer -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/boutonContinuer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="32dp"
+        android:contentDescription="Continue to explore"
         android:text="Continue"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#468C8A"
-        android:layout_marginTop="32dp"
-        android:paddingVertical="12dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:backgroundTint="#468C8A"
+        app:cornerRadius="12dp"
+        app:rippleColor="#80FFFFFF" />
 
 </LinearLayout>

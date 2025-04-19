@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <item name="register_button" type="id" />
     <item name="sign_in_button" type="id" />
     <item name="slider_title" type="id" />
@@ -71,4 +71,17 @@
     <item name="username_text_view" type="id" />
     <item name="notifications_button" type="id" />
     <item name="chats_recycler_view" type="id" />
+    <item name="comment_username" type="id" />
+    <item name="comment_like_button" type="id" />
+    <item name="comment_reply_button" type="id" />
+    <item name="comment_like_count" type="id" />
+    <item name="comment_profile_photo" type="id"  />
+    <item name="reaction_text" type="id" />
+    <item name="post_reaction_bar" type="id" />
+    <item name="post_reaction_like" type="id" />
+    <item name="post_reaction_love" type="id" />
+    <item name="post_reaction_haha" type="id" />
+    <item name="post_reaction_sad" type="id" />
+    <item name="post_reaction_angry" type="id" />
+    <item name="post_reaction_wow" type="id" />
 </resources>

@@ -3,54 +3,72 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp"
-    android:gravity="center_vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/notification_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:contentDescription="Notification Icon"
-        android:src="@drawable/ic_notification" />
-
+    <!-- Section icône et textes -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="8dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/notification_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="#000000" />
+        <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="Notification Icon"
+            android:src="@drawable/ic_notification" />
 
-        <TextView
-            android:id="@+id/notification_time"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="#666666" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/notification_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/notification_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#666666" />
+        </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/accept_button"
-        android:layout_width="wrap_content"
+    <!-- Section boutons -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#468C8A"
-        android:text="Accepter"
-        android:textColor="#FFFF"
-        android:textSize="12sp" />
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="8dp">
 
-    <Button
-        android:id="@+id/reject_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Refuser"
-        android:backgroundTint="#468C8A"
-        android:textColor="#FFFF"
-        android:textSize="12sp" />
+        <Button
+            android:id="@+id/accept_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#468C8A"
+            android:text="Accepter"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/reject_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#468C8A"
+            android:text="Refuser"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+
 </LinearLayout>

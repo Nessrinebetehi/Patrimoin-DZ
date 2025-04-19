@@ -2,6 +2,7 @@ package com.example.patrimoin_dz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Charger les vues
-        ImageView imageView = findViewById(R.id.imagePatrimoine);
+
         TextView titre = findViewById(R.id.titre);
         TextView description = findViewById(R.id.description);
         Button boutonContinuer = findViewById(R.id.boutonContinuer);
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         Animation slideUpAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_up);
 
         // Appliquer l'animation aux éléments
-        imageView.startAnimation(slideUpAnimation);
         titre.startAnimation(slideUpAnimation);
         description.startAnimation(slideUpAnimation);
         boutonContinuer.startAnimation(slideUpAnimation);

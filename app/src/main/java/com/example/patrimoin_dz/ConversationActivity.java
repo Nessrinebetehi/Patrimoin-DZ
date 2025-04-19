@@ -1,14 +1,11 @@
 package com.example.patrimoin_dz;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,8 +15,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,36 +25,29 @@ public class ConversationActivity extends AppCompatActivity {
     private static final String TAG = "ConversationActivity";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private FirebaseStorage storage;
     private RecyclerView recyclerViewMessages;
     private MessageAdapter messageAdapter;
     private List<Message> messageList;
     private EditText messageInput;
-    private ImageButton sendButton, attachImageButton;
+    private ImageButton sendButton;
     private String friendId, friendName;
-    private Uri imageUri;
-
-    private final ActivityResultLauncher<Intent> pickImageLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    imageUri = result.getData().getData();
-                    if (imageUri != null) {
-                        sendImageMessage();
-                    } else {
-                        Toast.makeText(this, "Aucune image sélectionnée", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
 
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        storage = FirebaseStorage.getInstance();
+        // Initialiser Firebase
+        try {
+            mAuth = FirebaseAuth.getInstance();
+            db = FirebaseFirestore.getInstance();
+            Log.d(TAG, "Firebase initialisé avec succès");
+        } catch (Exception e) {
+            Log.e(TAG, "Erreur initialisation Firebase: " + e.getMessage(), e);
+            Toast.makeText(this, "Erreur initialisation Firebase. Vérifiez Google Play Services.", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
@@ -69,6 +57,7 @@ public class ConversationActivity extends AppCompatActivity {
             finish();
             return;
         }
+        Log.d(TAG, "Utilisateur connecté: " + currentUser.getUid());
 
         friendId = getIntent().getStringExtra("friendId");
         friendName = getIntent().getStringExtra("friendName");
@@ -90,7 +79,6 @@ public class ConversationActivity extends AppCompatActivity {
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages);
         messageInput = findViewById(R.id.messageInput);
         sendButton = findViewById(R.id.sendButton);
-        attachImageButton = findViewById(R.id.attachImageButton);
 
         messageList = new ArrayList<>();
         messageAdapter = new MessageAdapter(messageList);
@@ -104,47 +92,46 @@ public class ConversationActivity extends AppCompatActivity {
             if (!messageText.isEmpty()) {
                 sendTextMessage(messageText);
                 messageInput.setText("");
+            } else {
+                Toast.makeText(this, "Veuillez entrer un message", Toast.LENGTH_SHORT).show();
             }
-        });
-
-        attachImageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            pickImageLauncher.launch(intent);
         });
     }
 
     private void loadMessages() {
-        String userId = mAuth.getCurrentUser().getUid();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Log.e(TAG, "Utilisateur non connecté dans loadMessages");
+            Toast.makeText(this, "Erreur: utilisateur non connecté", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        String userId = currentUser.getUid();
         String chatId = getChatId(userId, friendId);
+        Log.d(TAG, "Chargement messages pour chatId: " + chatId);
 
         db.collection("chats").document(chatId).collection("messages")
                 .orderBy("timestamp", Query.Direction.ASCENDING)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Log.e(TAG, "Erreur chargement messages: " + error.getMessage(), error);
-                        Toast.makeText(this, "Erreur chargement messages: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Erreur chargement messages: " + error.getMessage(), Toast.LENGTH_LONG).show();
                         return;
                     }
                     if (value != null) {
+                        messageList.clear(); // Effacer la liste pour éviter les doublons
                         for (DocumentChange dc : value.getDocumentChanges()) {
-                            Message message = dc.getDocument().toObject(Message.class);
-                            switch (dc.getType()) {
-                                case ADDED:
+                            try {
+                                if (dc.getType() == DocumentChange.Type.ADDED) {
+                                    Log.d(TAG, "Traitement document: " + dc.getDocument().getId() + ", données: " + dc.getDocument().getData());
+                                    Message message = dc.getDocument().toObject(Message.class);
+                                    message.setId(dc.getDocument().getId());
                                     messageList.add(message);
-                                    break;
-                                case MODIFIED:
-                                    // Update existing message if needed
-                                    for (int i = 0; i < messageList.size(); i++) {
-                                        if (messageList.get(i).getId().equals(message.getId())) {
-                                            messageList.set(i, message);
-                                            break;
-                                        }
-                                    }
-                                    break;
-                                case REMOVED:
-                                    messageList.removeIf(m -> m.getId().equals(message.getId()));
-                                    break;
+                                }
+                            } catch (Exception e) {
+                                Log.e(TAG, "Erreur lors du traitement du document " + dc.getDocument().getId() + ": " + e.getMessage(), e);
+                                Toast.makeText(this, "Erreur traitement message: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                         messageAdapter.notifyDataSetChanged();
@@ -158,73 +145,76 @@ public class ConversationActivity extends AppCompatActivity {
     private void sendTextMessage(String text) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            Log.e(TAG, "Utilisateur non connecté");
+            Log.e(TAG, "Utilisateur non connecté dans sendTextMessage");
             Toast.makeText(this, "Veuillez vous connecter", Toast.LENGTH_SHORT).show();
+            finish();
             return;
         }
+
         String userId = currentUser.getUid();
         String chatId = getChatId(userId, friendId);
+        Log.d(TAG, "Envoi message: " + text + ", chatId: " + chatId + ", userId: " + userId);
 
-        Map<String, Object> messageData = new HashMap<>();
-        messageData.put("content", text);
-        messageData.put("senderId", userId);
-        messageData.put("timestamp", System.currentTimeMillis());
-        messageData.put("isImage", false);
+        // Créer ou mettre à jour le document chat avec les participants
+        Map<String, Object> chatData = new HashMap<>();
+        List<String> participants = new ArrayList<>();
+        participants.add(userId);
+        participants.add(friendId);
+        chatData.put("participants", participants);
 
-        db.collection("chats").document(chatId).collection("messages")
-                .add(messageData)
-                .addOnSuccessListener(documentReference -> {
-                    Log.d(TAG, "Message texte envoyé: " + documentReference.getId());
-                    sendNotification("Nouveau message", "Vous avez reçu un message de " + friendName);
+        // Créer le document chat avant d'envoyer le message
+        db.collection("chats").document(chatId).set(chatData)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Document chat créé/mis à jour: " + chatId);
+
+                    // Créer le message
+                    Message message = new Message(text, userId, false);
+
+                    // Envoyer le message
+                    db.collection("chats").document(chatId).collection("messages")
+                            .add(message)
+                            .addOnSuccessListener(documentReference -> {
+                                Log.d(TAG, "Message texte envoyé: " + documentReference.getId());
+                                // Mettre à jour la conversation
+                                updateConversation(chatId, text, false);
+                                // Envoyer une notification
+                                sendNotification("Nouveau message", "Vous avez reçu un message de " + friendName);
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e(TAG, "Erreur envoi message: " + e.getMessage(), e);
+                                Toast.makeText(this, "Erreur envoi message: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            });
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Erreur envoi message: " + e.getMessage(), e);
-                    Toast.makeText(this, "Erreur envoi message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Erreur création chat: " + e.getMessage(), e);
+                    Toast.makeText(this, "Erreur création chat: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
 
-    private void sendImageMessage() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-            Log.e(TAG, "Utilisateur non connecté");
-            Toast.makeText(this, "Veuillez vous connecter", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String userId = currentUser.getUid();
-        String chatId = getChatId(userId, friendId);
-        StorageReference ref = storage.getReference().child("chat_images/" + System.currentTimeMillis() + ".jpg");
+    private void updateConversation(String chatId, String lastMessage, boolean isImage) {
+        Map<String, Object> conversationData = new HashMap<>();
+        conversationData.put("lastMessage", lastMessage);
+        conversationData.put("timestamp", System.currentTimeMillis());
 
-        ref.putFile(imageUri)
-                .addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
-                    Map<String, Object> messageData = new HashMap<>();
-                    messageData.put("content", uri.toString());
-                    messageData.put("senderId", userId);
-                    messageData.put("timestamp", System.currentTimeMillis());
-                    messageData.put("isImage", true);
-
-                    db.collection("chats").document(chatId).collection("messages")
-                            .add(messageData)
-                            .addOnSuccessListener(documentReference -> {
-                                Log.d(TAG, "Message image envoyé: " + documentReference.getId());
-                                sendNotification("Nouveau message image", "Vous avez reçu une image de " + friendName);
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.e(TAG, "Erreur envoi image: " + e.getMessage(), e);
-                                Toast.makeText(this, "Erreur envoi image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-                }))
-                .addOnFailureListener(e -> {
-                    Log.e(TAG, "Erreur upload image: " + e.getMessage(), e);
-                    Toast.makeText(this, "Erreur upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+        db.collection("conversations").document(chatId)
+                .set(conversationData)
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "Conversation mise à jour: " + chatId))
+                .addOnFailureListener(e -> Log.e(TAG, "Erreur mise à jour conversation: " + e.getMessage(), e));
     }
 
     private void sendNotification(String title, String message) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Log.e(TAG, "Utilisateur non connecté dans sendNotification");
+            return;
+        }
+
         Map<String, Object> notification = new HashMap<>();
         notification.put("title", title);
         notification.put("message", message);
         notification.put("timestamp", System.currentTimeMillis());
-        notification.put("senderId", mAuth.getCurrentUser().getUid());
+        notification.put("senderId", currentUser.getUid());
+        notification.put("recipientId", friendId);
 
         db.collection("notifications")
                 .add(notification)

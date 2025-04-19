@@ -3,6 +3,8 @@ package com.example.patrimoin_dz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -83,6 +85,7 @@ public class ChatActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Log.e(TAG, "Utilisateur non connecté");
+            Toast.makeText(this, "Veuillez vous connecter", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -94,6 +97,7 @@ public class ChatActivity extends AppCompatActivity {
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Log.e(TAG, "Erreur chargement amis: " + error.getMessage(), error);
+                        Toast.makeText(this, "Erreur chargement amis", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     chatList.clear();
@@ -102,36 +106,47 @@ public class ChatActivity extends AppCompatActivity {
                             String friendId = doc.getString("friendId");
                             String username = doc.getString("username");
                             if (friendId != null && username != null) {
-                                // Vérifier si une conversation existe
-                                String conversationId = generateConversationId(userId, friendId);
-                                db.collection("conversations").document(conversationId)
+                                db.collection("users").document(friendId)
                                         .get()
-                                        .addOnSuccessListener(conversationDoc -> {
-                                            String lastMessage = "";
-                                            String timestamp = "";
-                                            if (conversationDoc.exists()) {
-                                                lastMessage = conversationDoc.getString("lastMessage") != null ?
-                                                        conversationDoc.getString("lastMessage") : "";
-                                                Long conversationTimestamp = conversationDoc.getLong("timestamp");
-                                                timestamp = conversationTimestamp != null ?
-                                                        formatTimestamp(conversationTimestamp) : "";
-                                            }
-                                            Chat chat = new Chat(
-                                                    username,
-                                                    lastMessage,
-                                                    0, // Unread count TBD
-                                                    timestamp,
-                                                    R.drawable.ic_profile_placeholder
-                                            );
-                                            chatList.add(chat);
-                                            chatAdapter.notifyDataSetChanged();
+                                        .addOnSuccessListener(userDoc -> {
+                                            String profileImageUrl = userDoc.getString("profilePictureUrl");
+                                            String conversationId = generateConversationId(userId, friendId);
+                                            db.collection("conversations").document(conversationId)
+                                                    .get()
+                                                    .addOnSuccessListener(conversationDoc -> {
+                                                        String lastMessage = "";
+                                                        String timestamp = "";
+                                                        if (conversationDoc.exists()) {
+                                                            lastMessage = conversationDoc.getString("lastMessage") != null ?
+                                                                    conversationDoc.getString("lastMessage") : "";
+                                                            Long conversationTimestamp = conversationDoc.getLong("timestamp");
+                                                            timestamp = conversationTimestamp != null ?
+                                                                    formatTimestamp(conversationTimestamp) : "";
+                                                        }
+                                                        Chat chat = new Chat(
+                                                                username,
+                                                                lastMessage,
+                                                                0, // Unread count TBD
+                                                                timestamp,
+                                                                profileImageUrl != null ? profileImageUrl : ""
+                                                        );
+                                                        chatList.add(chat);
+                                                        chatAdapter.notifyDataSetChanged();
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Log.e(TAG, "Erreur récupération conversation: " + e.getMessage(), e);
+                                                        Toast.makeText(this, "Erreur récupération conversation", Toast.LENGTH_SHORT).show();
+                                                    });
                                         })
                                         .addOnFailureListener(e -> {
-                                            Log.e(TAG, "Erreur récupération conversation: " + e.getMessage(), e);
+                                            Log.e(TAG, "Erreur récupération profil utilisateur: " + e.getMessage(), e);
+                                            Toast.makeText(this, "Erreur récupération profil", Toast.LENGTH_SHORT).show();
                                         });
                             }
                         }
                         Log.d(TAG, "Amis chargés : " + chatList.size());
+                    } else {
+                        Toast.makeText(this, "Aucun ami trouvé", Toast.LENGTH_SHORT).show();
                     }
                     chatAdapter.notifyDataSetChanged();
                 });

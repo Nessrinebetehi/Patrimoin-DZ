@@ -1,83 +1,52 @@
 package com.example.patrimoin_dz;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Comment {
-    private String commentId; // Ajout de l'ID du commentaire
+    private String commentId;
     private String userId;
-    private String userName;
-    private String text;
-    private String time;
-    private String reaction;
+    private String username;
+    private String content;
+    private long timestamp;
+    private String parentCommentId;
+    private String profilePhotoUrl;
     private List<Comment> replies;
+    private Map<String, List<String>> reactions;
 
     public Comment() {
         this.replies = new ArrayList<>();
+        this.reactions = new HashMap<>();
     }
 
-    public Comment(String userId, String userName, String text, String time) {
-        this.userId = userId;
-        this.userName = userName;
-        this.text = text;
-        this.time = time;
-        this.replies = new ArrayList<>();
-    }
+    public String getCommentId() { return commentId; }
+    public void setCommentId(String commentId) { this.commentId = commentId; }
 
-    // Getters et setters
-    public String getCommentId() {
-        return commentId;
-    }
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 
-    public void setCommentId(String commentId) {
-        this.commentId = commentId;
-    }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getUserId() {
-        return userId;
-    }
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    public long getTimestamp() { return timestamp; }
+    public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getParentCommentId() { return parentCommentId; }
+    public void setParentCommentId(String parentCommentId) { this.parentCommentId = parentCommentId; }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    public String getProfilePhotoUrl() { return profilePhotoUrl; }
+    public void setProfilePhotoUrl(String profilePhotoUrl) { this.profilePhotoUrl = profilePhotoUrl; }
 
-    public String getText() {
-        return text;
-    }
+    public List<Comment> getReplies() { return replies; }
+    public void setReplies(List<Comment> replies) { this.replies = replies != null ? replies : new ArrayList<>(); }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getReaction() {
-        return reaction;
-    }
-
-    public void setReaction(String reaction) {
-        this.reaction = reaction;
-    }
-
-    public List<Comment> getReplies() {
-        return replies;
-    }
-
-    public void setReplies(List<Comment> replies) {
-        this.replies = replies;
+    public Map<String, List<String>> getReactions() { return reactions; }
+    public void setReactions(Map<String, List<String>> reactions) {
+        this.reactions = reactions != null ? reactions : new HashMap<>();
     }
 }

@@ -123,7 +123,82 @@
                 app:layout_constraintTop_toBottomOf="@id/post_content"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <!-- Boutons J'aime, Commenter, Partager avec texte uniquement -->
+            <!-- Reaction Bar -->
+            <LinearLayout
+                android:id="@+id/post_reaction_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/reaction_bar_background"
+                android:padding="6dp"
+                android:elevation="4dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/action_buttons"
+                app:layout_constraintStart_toStartOf="@id/like_text"
+                app:layout_constraintEnd_toEndOf="@id/like_text"
+                tools:ignore="NotSibling">
+
+                <TextView
+                    android:id="@+id/post_reaction_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👍"
+                    android:textSize="22sp"
+                    android:padding="6dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/post_reaction_love"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="❤️"
+                    android:textSize="22sp"
+                    android:padding="6dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/post_reaction_haha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="😂"
+                    android:textSize="22sp"
+                    android:padding="6dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/post_reaction_wow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="😮"
+                    android:textSize="22sp"
+                    android:padding="6dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/post_reaction_sad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="😢"
+                    android:textSize="22sp"
+                    android:padding="6dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/post_reaction_angry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="😣"
+                    android:textSize="22sp"
+                    android:padding="6dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless" />
+            </LinearLayout>
+
+            <!-- Boutons J'aime, Commenter, Partager -->
             <LinearLayout
                 android:id="@+id/action_buttons"
                 android:layout_width="match_parent"
@@ -136,28 +211,23 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <!-- Bouton Like -->
-                <LinearLayout
-                    android:id="@+id/like_button"
+                <Button
+                    android:id="@+id/like_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
                     android:background="?android:attr/selectableItemBackground"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Like"
-                        android:singleLine="true"
-                        android:textColor="#888888"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    android:padding="12dp"
+                    android:singleLine="true"
+                    android:text="like"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <!-- Bouton Comment -->
-                <LinearLayout
+                <Button
                     android:id="@+id/comment_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -165,20 +235,14 @@
                     android:layout_marginHorizontal="4dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Comment"
-                        android:singleLine="true"
-                        android:textColor="#888888"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    android:padding="12dp"
+                    android:text="Comment"
+                    android:singleLine="true"
+                    android:textColor="#888888"
+                    android:textSize="14sp" />
 
                 <!-- Bouton Share -->
-                <LinearLayout
+                <Button
                     android:id="@+id/share_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -186,17 +250,11 @@
                     android:layout_marginHorizontal="4dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Share"
-                        android:singleLine="true"
-                        android:textColor="#888888"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    android:padding="12dp"
+                    android:text="Share"
+                    android:singleLine="true"
+                    android:textColor="#888888"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Icône de son -->

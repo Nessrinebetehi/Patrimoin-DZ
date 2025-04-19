@@ -28,11 +28,7 @@ public class Friend {
         this.username = username;
     }
 
-    public int getUserName() {
-        return 0;
-    }
-
     public String getUserId() {
-        return null;
+        return friendId;
     }
 }

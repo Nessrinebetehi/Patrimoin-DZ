@@ -1,5 +1,10 @@
 package com.example.patrimoin_dz;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Post {
     private String postId;
     private String userId;
@@ -9,9 +14,11 @@ public class Post {
     private String content;
     private long timestamp;
     private boolean isPublic;
+    private Map<String, List<String>> reactions;
 
     // Constructeur sans argument requis par Firestore
     public Post() {
+        this.reactions = new HashMap<>();
     }
 
     // Constructeur complet
@@ -24,6 +31,7 @@ public class Post {
         this.content = content;
         this.timestamp = timestamp;
         this.isPublic = false; // Par défaut
+        this.reactions = new HashMap<>();
     }
 
     // Getters
@@ -59,6 +67,10 @@ public class Post {
         return isPublic;
     }
 
+    public Map<String, List<String>> getReactions() {
+        return reactions;
+    }
+
     // Setters
     public void setPostId(String postId) {
         this.postId = postId;
@@ -90,5 +102,9 @@ public class Post {
 
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
+    }
+
+    public void setReactions(Map<String, List<String>> reactions) {
+        this.reactions = reactions != null ? reactions : new HashMap<>();
     }
 }

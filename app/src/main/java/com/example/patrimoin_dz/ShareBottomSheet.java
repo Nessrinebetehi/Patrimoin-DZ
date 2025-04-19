@@ -1,5 +1,6 @@
 package com.example.patrimoin_dz;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShareBottomSheet extends BottomSheetDialogFragment {
 
@@ -41,6 +47,10 @@ public class ShareBottomSheet extends BottomSheetDialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             postId = getArguments().getString(ARG_POST_ID);
+            Log.d(TAG, "ShareBottomSheet created with postId: " + postId);
+        } else {
+            Log.e(TAG, "No arguments provided to ShareBottomSheet");
+            showToastSafely("Erreur : ID de publication manquant");
         }
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -55,61 +65,182 @@ public class ShareBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "ShareBottomSheet view created");
 
         // Initialize views
         friendsRecyclerView = view.findViewById(R.id.friends_recycler_view);
 
+        if (friendsRecyclerView == null) {
+            Log.e(TAG, "friendsRecyclerView is null in bottom_sheet_share layout");
+            showToastSafely("Erreur d'initialisation de l'interface");
+            dismiss();
+            return;
+        }
+
         // Setup RecyclerView
         friendList = new ArrayList<>();
-        // Ajouter des amis fictifs pour tester (à remplacer par des données réelles depuis Firestore)
-        friendList.add(new Friend("friend1", "Amina"));
-        friendList.add(new Friend("friend2", "Karim"));
-        friendList.add(new Friend("friend3", "Sofia"));
-        friendList.add(new Friend("friend4", "Yanis"));
-
-        friendAdapter = new FriendAdapter(friendList, friend -> {
-            // Gérer le clic sur un ami pour partager
-            sharePostWithFriend(friend);
-        });
+        friendAdapter = FriendAdapter.createFriendAdapter(friendList, this::sharePostWithFriend);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         friendsRecyclerView.setLayoutManager(layoutManager);
         friendsRecyclerView.setAdapter(friendAdapter);
+
+        // Load friends from conversations
+        loadFriendsFromConversations();
+    }
+
+    private void loadFriendsFromConversations() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Log.e(TAG, "loadFriendsFromConversations: User not logged in");
+            showToastSafely("Utilisateur non connecté");
+            dismiss();
+            return;
+        }
+        String currentUserId = currentUser.getUid();
+
+        db.collection("conversations")
+                .whereArrayContains("userIds", currentUserId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!isAdded()) {
+                        Log.w(TAG, "Fragment not attached, aborting");
+                        return;
+                    }
+                    friendList.clear();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        List<String> userIds = (List<String>) doc.get("userIds");
+                        if (userIds != null && userIds.size() == 2) {
+                            String friendId = userIds.get(0).equals(currentUserId) ? userIds.get(1) : userIds.get(0);
+                            // Fetch friend details
+                            db.collection("users").document(friendId)
+                                    .get()
+                                    .addOnSuccessListener(userDoc -> {
+                                        if (!isAdded()) {
+                                            Log.w(TAG, "Fragment not attached, skipping friend add");
+                                            return;
+                                        }
+                                        if (userDoc.exists()) {
+                                            String username = userDoc.getString("username");
+                                            if (username != null && !username.isEmpty()) {
+                                                friendList.add(new Friend(friendId, username));
+                                                friendAdapter.notifyDataSetChanged();
+                                                Log.d(TAG, "Added friend: " + username + ", ID: " + friendId);
+                                            } else {
+                                                Log.w(TAG, "Friend username is null or empty for ID: " + friendId);
+                                            }
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.e(TAG, "Error fetching friend details: " + e.getMessage(), e);
+                                    });
+                        }
+                    }
+                    if (friendList.isEmpty()) {
+                        Log.w(TAG, "No friends found in conversations");
+                        showToastSafely("Aucun ami trouvé dans les conversations");
+                        dismiss();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (!isAdded()) {
+                        Log.w(TAG, "Fragment not attached, skipping error handling");
+                        return;
+                    }
+                    Log.e(TAG, "Error loading conversations: " + e.getMessage(), e);
+                    showToastSafely("Erreur lors du chargement des amis");
+                    dismiss();
+                });
     }
 
     private void sharePostWithFriend(Friend friend) {
-        String currentUserId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
-        if (currentUserId == null) {
-            Toast.makeText(getContext(), "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
+        if (!isAdded()) {
+            Log.w(TAG, "Fragment not attached, cannot share");
             return;
         }
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Log.e(TAG, "sharePostWithFriend: User not logged in");
+            showToastSafely("Utilisateur non connecté");
+            return;
+        }
+        String currentUserId = currentUser.getUid();
 
         if (postId == null) {
-            Toast.makeText(getContext(), "Erreur : ID de la publication manquant", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "sharePostWithFriend: postId is null");
+            showToastSafely("Erreur : ID de la publication manquant");
             return;
         }
 
-        // Simuler le partage (à remplacer par une vraie logique de partage, par exemple via Firestore)
-        Toast.makeText(getContext(), "Publication partagée avec " + friend.getUserName(), Toast.LENGTH_SHORT).show();
+        String friendUserId = friend.getUserId();
+        if (friendUserId == null) {
+            Log.e(TAG, "sharePostWithFriend: friend userId is null");
+            showToastSafely("Erreur : Ami non valide");
+            return;
+        }
 
-        // (Optionnel) Sauvegarder le partage dans Firestore
-        saveShareToFirestore(currentUserId, friend.getUserId());
+        String friendName = friend.getUsername() != null ? friend.getUsername() : "un ami";
+        Log.d(TAG, "Sharing post " + postId + " with friend: " + friendName);
 
-        // Fermer la Bottom Sheet après le partage
-        dismiss();
-    }
+        // Find or create conversation
+        String conversationId = getConversationId(currentUserId, friendUserId);
+        Map<String, Object> message = new HashMap<>();
+        message.put("senderId", currentUserId);
+        message.put("postId", postId);
+        message.put("type", "shared_post");
+        message.put("timestamp", System.currentTimeMillis());
 
-    private void saveShareToFirestore(String currentUserId, String friendUserId) {
-        // Simuler un partage dans Firestore (par exemple, ajouter une entrée dans une collection "shares")
-        db.collection("users").document(friendUserId)
-                .collection("shared_posts")
-                .document(postId)
-                .set(new Share(currentUserId, postId))
-                .addOnSuccessListener(aVoid -> {
-                    Log.d(TAG, "saveShareToFirestore: Post shared successfully with " + friendUserId);
+        db.collection("conversations")
+                .document(conversationId)
+                .collection("messages")
+                .add(message)
+                .addOnSuccessListener(documentReference -> {
+                    if (!isAdded()) {
+                        Log.w(TAG, "Fragment not attached, skipping success handling");
+                        return;
+                    }
+                    Log.d(TAG, "Post shared successfully with " + friendName + " in conversation: " + conversationId);
+                    showToastSafely("Publication partagée avec " + friendName);
+                    // Update conversation metadata
+                    updateConversationMetadata(conversationId, currentUserId, friendUserId);
+                    dismiss();
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "saveShareToFirestore: Failed to share post - " + e.getMessage());
-                    Toast.makeText(getContext(), "Erreur lors du partage", Toast.LENGTH_SHORT).show();
+                    if (!isAdded()) {
+                        Log.w(TAG, "Fragment not attached, skipping error handling");
+                        return;
+                    }
+                    Log.e(TAG, "Failed to share post: " + e.getMessage(), e);
+                    showToastSafely("Erreur lors du partage");
                 });
+    }
+
+    private String getConversationId(String userId1, String userId2) {
+        // Generate a consistent conversation ID by sorting user IDs
+        return userId1.compareTo(userId2) < 0 ? userId1 + "_" + userId2 : userId2 + "_" + userId1;
+    }
+
+    private void updateConversationMetadata(String conversationId, String currentUserId, String friendUserId) {
+        Map<String, Object> conversationData = new HashMap<>();
+        conversationData.put("userIds", List.of(currentUserId, friendUserId));
+        conversationData.put("lastMessageTimestamp", System.currentTimeMillis());
+
+        db.collection("conversations")
+                .document(conversationId)
+                .set(conversationData)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Conversation metadata updated for ID: " + conversationId);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Failed to update conversation metadata: " + e.getMessage(), e);
+                });
+    }
+
+    private void showToastSafely(String message) {
+        Context context = getContext();
+        if (context != null && isAdded()) {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        } else {
+            Log.w(TAG, "Cannot show toast: context is null or fragment not attached");
+        }
     }
 }

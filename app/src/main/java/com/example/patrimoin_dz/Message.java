@@ -9,17 +9,29 @@ public class Message {
     private long timestamp;
     private boolean isImage;
 
-    // Constructeur sans argument requis par Firestore
-    public Message(Uri uri, boolean b) {
+    // Constructeur sans arguments requis par Firestore
+    public Message(String s, boolean b) {
+        // Initialisation par défaut si nécessaire
+        this.isImage = false;
     }
 
-    public Message(String content, boolean isImage) {
+    // Constructeur pour les messages texte
+    public Message(String content, String senderId, boolean isImage) {
         this.content = content;
         this.senderId = senderId;
-        this.timestamp = timestamp;
+        this.timestamp = System.currentTimeMillis();
         this.isImage = isImage;
     }
 
+    // Constructeur pour les messages image
+    public Message(Uri uri, String senderId, boolean isImage) {
+        this.content = uri.toString();
+        this.senderId = senderId;
+        this.timestamp = System.currentTimeMillis();
+        this.isImage = isImage;
+    }
+
+    // Getters et setters
     public String getId() {
         return id;
     }

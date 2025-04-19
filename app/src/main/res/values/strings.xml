@@ -15,5 +15,9 @@
     <string name="save">Save</string>
     <string name="switch_account">Switch Account</string>
     <string name="create_new_account">Créer un nouveau compte</string>
+    <string name="reply">Répondre</string>
+    <string name="react">Réagir</string>
+    <string name="profile_image">Image de profil</string>
+    <string name="like">\n\n</string>
 
 </resources>

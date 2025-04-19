@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
@@ -31,7 +33,20 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         Chat chat = chatList.get(position);
         holder.userName.setText(chat.getUserName());
         holder.lastMessage.setText(chat.getLastMessage());
-        holder.profileImage.setImageResource(chat.getProfileImage());
+
+        if (chat.getProfileImageUrl() != null && !chat.getProfileImageUrl().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(chat.getProfileImageUrl())
+                    .thumbnail(0.1f)
+                    .override(100, 100)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.ic_profile_placeholder)
+                    .error(R.drawable.ic_profile_placeholder)
+                    .circleCrop()
+                    .into(holder.profileImage);
+        } else {
+            holder.profileImage.setImageResource(R.drawable.ic_profile_placeholder);
+        }
 
         if (chat.getUnreadCount() > 0) {
             holder.unreadCount.setText("+ de " + chat.getUnreadCount() + " nouveaux ...");
@@ -50,8 +65,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         }
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(holder.itemView.getContext(), ChatConversationActivity.class);
-            intent.putExtra("USER_NAME", chat.getUserName());
+            Intent intent = new Intent(holder.itemView.getContext(), ConversationActivity.class);
+            intent.putExtra("friendId", chat.getConversationId() != null ? chat.getConversationId() : "");
+            intent.putExtra("friendName", chat.getUserName());
             holder.itemView.getContext().startActivity(intent);
         });
     }

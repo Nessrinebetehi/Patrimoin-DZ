@@ -84,8 +84,7 @@
         <activity android:name=".AccountsListActivity" />
         <activity android:name=".CreateStoryActivity" />
         <activity android:name=".ViewStoryActivity" />
-
-
+        <activity android:name=".ConversationActivity"/>
 
     </application>
 

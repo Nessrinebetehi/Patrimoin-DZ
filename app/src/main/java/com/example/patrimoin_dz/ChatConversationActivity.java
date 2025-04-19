@@ -1,7 +1,5 @@
 package com.example.patrimoin_dz;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,7 +28,7 @@ public class ChatConversationActivity extends AppCompatActivity {
             uri -> {
                 if (uri != null) {
                     // Ajouter l'image sélectionnée à la conversation
-                    messageList.add(new Message(uri, true));
+                    messageList.add(new Message("Qu'y a-t-il sur votre playlist ?", false));
                     messageAdapter.notifyItemInserted(messageList.size() - 1);
                     recyclerViewMessages.scrollToPosition(messageList.size() - 1);
                 }

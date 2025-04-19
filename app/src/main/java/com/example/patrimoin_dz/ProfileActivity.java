@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -54,8 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
+        AtomicReference<FirebaseUser> currentUser = new AtomicReference<>(mAuth.getCurrentUser());
+        if (currentUser.get() == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
@@ -105,11 +106,156 @@ public class ProfileActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
 
-        // Ajouter un écouteur pour le bouton "Add Friend" dans PostAdapter
-        postAdapter.setAddFriendListener(post -> sendFriendRequest(new User(post.getUserName(), post.getUserName(), post.getUserProfileImageUrl(), post.getUserId())));
+        postAdapter.setCommentClickListener(post -> {
+            if (post.getPostId() == null) {
+                Log.e(TAG, "Comment button clicked but postId is null");
+                Toast.makeText(this, "Erreur : ID de publication manquant", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Log.d(TAG, "Comment button clicked for post: " + post.getPostId());
+            CommentsBottomSheet commentsBottomSheet = CommentsBottomSheet.newInstance(post.getPostId());
+            try {
+                commentsBottomSheet.show(getSupportFragmentManager(), "CommentsBottomSheet");
+                Log.d(TAG, "CommentsBottomSheet opened successfully for post: " + post.getPostId());
+            } catch (Exception e) {
+                Log.e(TAG, "Error opening CommentsBottomSheet: " + e.getMessage(), e);
+                Toast.makeText(this, "Erreur lors de l'ouverture des commentaires", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        postAdapter.setShareClickListener(post -> {
+            if (post.getPostId() == null) {
+                Log.e(TAG, "Share button clicked but postId is null");
+                Toast.makeText(this, "Erreur : ID de publication manquant", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Log.d(TAG, "Share button clicked for post: " + post.getPostId());
+            ShareBottomSheet shareBottomSheet = ShareBottomSheet.newInstance(post.getPostId());
+            try {
+                shareBottomSheet.show(getSupportFragmentManager(), "ShareBottomSheet");
+                Log.d(TAG, "ShareBottomSheet opened successfully for post: " + post.getPostId());
+            } catch (Exception e) {
+                Log.e(TAG, "Error opening ShareBottomSheet: " + e.getMessage(), e);
+                Toast.makeText(this, "Erreur lors de l'ouverture du partage", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        postAdapter.setAddFriendListener(post -> {
+            if (post.getUserId() == null || post.getUserName() == null) {
+                Log.e(TAG, "Add friend button clicked but userId or userName is null");
+                Toast.makeText(this, "Erreur : Informations utilisateur manquantes", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            sendFriendRequest(new User(post.getUserName(), post.getUserName(), post.getUserProfileImageUrl(), post.getUserId()));
+        });
+
+        postAdapter.setLikeClickListener((post, reactionType) -> {
+            if (post.getPostId() == null) {
+                Log.e(TAG, "Like button clicked but postId is null");
+                Toast.makeText(this, "Erreur : ID de publication manquant", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            currentUser.set(mAuth.getCurrentUser());
+            if (currentUser.get() == null) {
+                Log.e(TAG, "likePost: User not logged in");
+                Toast.makeText(this, "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String currentUserId = currentUser.get().getUid();
+
+            int postPosition = postList.indexOf(post);
+            if (postPosition == -1) {
+                Log.e(TAG, "likePost: Post not found in postList");
+                return;
+            }
+
+            db.collection("posts")
+                    .document(post.getPostId())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        Map<String, List<String>> reactions = (Map<String, List<String>>) documentSnapshot.get("reactions");
+                        if (reactions == null) {
+                            reactions = new HashMap<>();
+                        }
+                        List<String> reactionUsers = reactions.getOrDefault(reactionType, new ArrayList<>());
+                        boolean isReacted = reactionUsers.contains(currentUserId);
+                        if (isReacted) {
+                            reactionUsers.remove(currentUserId);
+                            Toast.makeText(this, "Réaction supprimée", Toast.LENGTH_SHORT).show();
+                        } else {
+                            for (List<String> users : reactions.values()) {
+                                users.remove(currentUserId);
+                            }
+                            reactionUsers.add(currentUserId);
+                            Toast.makeText(this, "Réaction ajoutée: " + reactionType, Toast.LENGTH_SHORT).show();
+                            createReactionNotification(currentUserId, post, reactionType);
+                        }
+                        reactions.put(reactionType, reactionUsers);
+
+                        Map<String, List<String>> finalReactions = reactions;
+                        db.collection("posts")
+                                .document(post.getPostId())
+                                .update("reactions", reactions)
+                                .addOnSuccessListener(aVoid -> {
+                                    Log.d(TAG, "Post reaction updated for post " + post.getPostId());
+                                    post.setReactions(finalReactions);
+                                    postAdapter.notifyItemChanged(postPosition);
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.e(TAG, "Failed to update reaction: " + e.getMessage(), e);
+                                    Toast.makeText(this, "Erreur lors de la mise à jour de la réaction", Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e(TAG, "Failed to fetch post: " + e.getMessage(), e);
+                        Toast.makeText(this, "Erreur lors de la récupération de la publication", Toast.LENGTH_SHORT).show();
+                    });
+        });
 
         setupSearchView();
         loadAllPosts();
+    }
+
+    private void createReactionNotification(String senderId, Post post, String reactionType) {
+        Map<String, String> reactionEmojis = new HashMap<>();
+        reactionEmojis.put("like", "👍");
+        reactionEmojis.put("love", "❤️");
+        reactionEmojis.put("haha", "😂");
+        reactionEmojis.put("wow", "😮");
+        reactionEmojis.put("sad", "😢");
+        reactionEmojis.put("angry", "😣");
+
+        String emoji = reactionEmojis.get(reactionType);
+        if (emoji == null) {
+            Log.e(TAG, "Invalid reaction type: " + reactionType);
+            return;
+        }
+
+        db.collection("users").document(senderId)
+                .get()
+                .addOnSuccessListener(doc -> {
+                    String senderUsername = doc.getString("username");
+                    if (senderUsername == null) {
+                        senderUsername = "Utilisateur inconnu";
+                    }
+                    String postOwnerId = post.getUserId();
+                    if (postOwnerId != null && !postOwnerId.equals(senderId)) {
+                        Map<String, Object> notificationData = new HashMap<>();
+                        notificationData.put("type", "reaction");
+                        notificationData.put("message", senderUsername + " a réagi à votre publication avec " + emoji);
+                        notificationData.put("timestamp", System.currentTimeMillis());
+                        notificationData.put("recipientId", postOwnerId);
+                        notificationData.put("senderId", senderId);
+                        notificationData.put("postId", post.getPostId());
+                        notificationData.put("emoji", emoji);
+
+                        db.collection("notifications")
+                                .add(notificationData)
+                                .addOnSuccessListener(ref -> Log.d(TAG, "Reaction notification created for post " + post.getPostId()))
+                                .addOnFailureListener(e -> Log.e(TAG, "Failed to create reaction notification: " + e.getMessage(), e));
+                    }
+                })
+                .addOnFailureListener(e -> Log.e(TAG, "Failed to fetch sender username: " + e.getMessage(), e));
     }
 
     private void setupSearchView() {
@@ -200,7 +346,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
         String currentUserId = currentUser.getUid();
 
-        // Vérifier si une demande existe déjà
         db.collection("friend_requests")
                 .whereEqualTo("senderId", currentUserId)
                 .whereEqualTo("recipientId", user.getUid())
@@ -212,7 +357,6 @@ public class ProfileActivity extends AppCompatActivity {
                         return;
                     }
 
-                    // Récupérer le nom d'utilisateur de l'expéditeur
                     db.collection("users").document(currentUserId)
                             .get()
                             .addOnSuccessListener(documentSnapshot -> {
@@ -222,7 +366,6 @@ public class ProfileActivity extends AppCompatActivity {
                                         senderUsername = "Utilisateur inconnu";
                                     }
 
-                                    // Créer la demande d'ami
                                     Map<String, Object> request = new HashMap<>();
                                     request.put("senderId", currentUserId);
                                     request.put("senderUsername", senderUsername);
@@ -282,6 +425,12 @@ public class ProfileActivity extends AppCompatActivity {
                             Post post = doc.toObject(Post.class);
                             if (post != null && post.getUserId() != null) {
                                 post.setPostId(doc.getId());
+                                Map<String, List<String>> reactions = (Map<String, List<String>>) doc.get("reactions");
+                                if (reactions != null) {
+                                    post.setReactions(reactions);
+                                } else {
+                                    post.setReactions(new HashMap<>());
+                                }
                                 db.collection("users").document(post.getUserId())
                                         .get()
                                         .addOnSuccessListener(userDoc -> {
@@ -291,7 +440,10 @@ public class ProfileActivity extends AppCompatActivity {
                                                 post.setUserName(userName != null ? userName : "Utilisateur inconnu");
                                                 post.setUserProfileImageUrl(profileImageUrl);
                                                 post.setUserId(post.getUserId());
-                                                postAdapter.notifyDataSetChanged();
+                                                int postPosition = postList.indexOf(post);
+                                                if (postPosition != -1) {
+                                                    postAdapter.notifyItemChanged(postPosition);
+                                                }
                                             }
                                         })
                                         .addOnFailureListener(e -> Log.e(TAG, "Erreur récupération nom utilisateur: " + e.getMessage(), e));
@@ -299,11 +451,11 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         }
                         Log.d(TAG, "Posts chargés : " + postList.size());
+                        postAdapter.notifyDataSetChanged();
                     } else {
                         Log.d(TAG, "Aucune publication trouvée");
                         Toast.makeText(this, "Aucune publication disponible", Toast.LENGTH_SHORT).show();
                     }
-                    postAdapter.notifyDataSetChanged();
                 });
     }
 
